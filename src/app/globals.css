@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ===================================================================
+   NEON SIAM — DESIGN TOKENS
+   Single source of truth for color, type, spacing, shadow, radius and
+   motion. Every value below is referenced by name elsewhere in the
+   app — never hardcode a hex code or timing value outside this file.
+   =================================================================== */
+
+:root {
+  /* ---- Color: surfaces ------------------------------------------ */
+  --color-bg-primary: #050816;
+  --color-bg-secondary: #0d1021;
+  --color-surface: #111827;
+
+  /* ---- Color: accents --------------------------------------------- */
+  --color-accent-cyan: #00f5ff;
+  --color-accent-purple: #8a2eff;
+  --color-highlight: #4fc3f7;
+  --color-danger: #ff4d6d;
+  --color-success: #00e676;
+
+  /* ---- Color: text -------------------------------------------------- */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b6c2cf;
+
+  /* ---- Color: borders & glow ----------------------------------------- */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --glow-cyan: 0 0 24px rgba(0, 245, 255, 0.35);
+  --glow-cyan-soft: 0 0 12px rgba(0, 245, 255, 0.2);
+  --glow-purple: 0 0 24px rgba(138, 46, 255, 0.35);
+  --glow-purple-soft: 0 0 12px rgba(138, 46, 255, 0.2);
+
+  /* ---- Typography ------------------------------------------------- */
+  --font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+
+  /* ---- Radius ------------------------------------------------------- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-full: 999px;
+
+  /* ---- Shadow / elevation --------------------------------------------- */
+  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-elevation-3: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* ---- Motion --------------------------------------------------------
+     Central timing/easing scale. GSAP + Framer Motion utilities in
+     src/lib/motion.ts read the numeric values that mirror these. */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-instant: 120ms;
+  --duration-fast: 240ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-cinematic: 1000ms;
+
+  /* ---- Layout ----------------------------------------------------- */
+  --container-max: 1280px;
+  --nav-height: 84px;
+}
+
+/* Tailwind v4 CSS-first theme mapping — exposes the tokens above as
+   Tailwind utilities, e.g. bg-bg-primary, text-accent-cyan, font-heading,
+   shadow-glass, rounded-lg, duration-base. */
+@theme inline {
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-surface: var(--color-surface);
+
+  --color-accent-cyan: var(--color-accent-cyan);
+  --color-accent-purple: var(--color-accent-purple);
+  --color-highlight: var(--color-highlight);
+  --color-danger: var(--color-danger);
+  --color-success: var(--color-success);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-border: var(--color-border);
+
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  --shadow-elevation-1: var(--shadow-elevation-1);
+  --shadow-elevation-2: var(--shadow-elevation-2);
+  --shadow-elevation-3: var(--shadow-elevation-3);
+  --shadow-glass: var(--shadow-glass);
+
+  --ease-premium: var(--ease-premium);
+  --ease-out-soft: var(--ease-out-soft);
+}
+
+/* ===================================================================
+   BASE
+   =================================================================== */
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: auto; /* Lenis owns scroll physics; native smooth-scroll off */
+  background: var(--color-bg-primary);
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+}
+
+/* Visible, on-brand focus ring — accessibility is never sacrificed
+   for aesthetics. */
+:focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-accent-purple);
+  color: var(--color-text-primary);
+}
+
+/* Thin scrollbar that matches the cyberpunk surface, desktop only. */
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      var(--color-accent-cyan),
+      var(--color-accent-purple)
+    );
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-bg-primary);
+  }
+}
+
+/* Glassmorphism utility — reused by navbar, cards, modals. */
+.glass-surface {
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-border);
+}
+
+/* Respect reduced-motion system-wide. Individual components still
+   guard heavier GSAP/Lenis setup in JS via useReducedMotion(). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
