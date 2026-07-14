@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   align?: "left" | "center";
@@ -9,10 +9,7 @@ interface SectionHeadingProps {
 }
 
 /**
- * Every section title in the spec follows the same rhythm: a small
- * mono eyebrow, a large heading, an optional subtitle. Centralized
- * here so that rhythm stays identical across About/Education/Skills/
- * Projects/Certificates/Contact instead of being redeclared per section.
+ * Shared section heading component
  */
 export function SectionHeading({
   eyebrow,
@@ -23,13 +20,31 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn(align === "center" && "text-center", className)}>
-      <p className="text-accent-cyan font-mono text-xs tracking-[0.3em] uppercase">
-        {eyebrow}
-      </p>
-      <h2 className="font-heading text-text-primary mt-3 text-4xl font-semibold sm:text-5xl">
+      {eyebrow && (
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent-cyan">
+          {eyebrow}
+        </p>
+      )}
+
+      <h2
+        className={cn(
+          "font-heading text-4xl font-semibold text-text-primary sm:text-5xl",
+          eyebrow ? "mt-3" : ""
+        )}
+      >
         {title}
       </h2>
-      {subtitle && <p className="text-text-secondary mt-3 max-w-xl">{subtitle}</p>}
+
+      {subtitle && (
+        <p
+          className={cn(
+            "text-text-secondary mt-3",
+            align === "center" ? "mx-auto max-w-2xl" : "max-w-xl"
+          )}
+        >
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
