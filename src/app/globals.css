@@ -24,6 +24,26 @@
   /* ---- Color: text -------------------------------------------------- */
   --color-text-primary: #ffffff;
   --color-text-secondary: #b6c2cf;
+  /* ---- AI Chat -------------------------------------------------- */
+
+--chat-bg: #0b1220;
+--chat-panel: #111827;
+
+--chat-ai: #182235;
+--chat-ai-hover: #1d2a42;
+
+--chat-user-start: #06b6d4;
+--chat-user-end: #0ea5e9;
+
+--chat-input: #101827;
+
+--chat-border: rgba(255,255,255,.08);
+
+--chat-shadow: 0 20px 60px rgba(0,0,0,.55);
+--chat-shadow-soft: 0 10px 25px rgba(0,0,0,.35);
+--chat-glow: 0 0 25px rgba(34,211,238,.18);
+
+--chat-scroll: #22d3ee;
 
   /* ---- Color: borders & glow ----------------------------------------- */
   --color-border: rgba(255, 255, 255, 0.08);
@@ -83,6 +103,19 @@
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
   --color-border: var(--color-border);
+
+   --color-chat-bg: var(--chat-bg);
+--color-chat-panel: var(--chat-panel);
+
+--color-chat-ai: var(--chat-ai);
+--color-chat-ai-hover: var(--chat-ai-hover);
+
+--color-chat-user-start: var(--chat-user-start);
+--color-chat-user-end: var(--chat-user-end);
+
+--color-chat-input: var(--chat-input);
+
+--color-chat-border: var(--chat-border);
 
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);

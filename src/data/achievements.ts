@@ -29,7 +29,7 @@ export const ACHIEVEMENTS: AchievementEntry[] = [
   },
   {
     id: "ssc-result",
-    title: "SSC — A+",
+    title: "SSC — G.P.A : 5.00",
     description:
       "Completed the Secondary School Certificate at Kushtia Zilla School with the highest grade.",
     date: "2022",
@@ -37,7 +37,7 @@ export const ACHIEVEMENTS: AchievementEntry[] = [
   },
   {
     id: "hsc-result",
-    title: "HSC — A+",
+    title: "HSC — G.P.A : 5.00",
     description:
       "Completed the Higher Secondary Certificate at Cantonment College, Jashore with the highest grade.",
     date: "2024",
@@ -79,7 +79,7 @@ export const CURRENTLY_LEARNING: LearningItem[] = [
   },
   {
     id: "Microprocessors & Microcontrollers",
-    label: "Microprocessors & Microcontrollers",
-    description: "Studying microprocessor and microcontroller architectures, embedded systems, interfacing techniques, and hardware-based system design..",
+    label: "Assembly Language Programming",
+    description: "Learning low-level programming concepts, x86 Assembly language, CPU registers, memory addressing, stack operations, interrupts, and instruction execution to understand how software interacts directly with computer hardware.",
   },
 ];

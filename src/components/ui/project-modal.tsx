@@ -26,6 +26,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
   }, [open]);
 
   if (!project || !open) return null;
+  
 
   return (
     <AnimatePresence>
@@ -52,6 +53,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
               <h2 className="text-2xl font-bold text-text-primary md:text-3xl">
                 {project.title}
               </h2>
+              
               <button
                 onClick={onClose}
                 className="rounded-full p-2 text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
@@ -216,12 +218,15 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                   </div>
                 )}
 
-              {/* Gallery */}
-              {project.gallery && project.gallery.length > 0 && (
-                <div className="pt-4 border-t border-border">
-                  <ProjectGallery gallery={project.gallery} title={project.title} />
-                </div>
-              )}
+             {/* Gallery */}
+{project.gallery && project.gallery.length > 0 && (
+  <div className="pt-4 border-t border-border">
+    <ProjectGallery
+      gallery={project.gallery}
+      title={project.title}
+    />
+  </div>
+)}
             </div>
 
             {/* Footer / Actions */}

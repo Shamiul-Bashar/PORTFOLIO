@@ -1,10 +1,17 @@
 "use client";
+
 import { useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Bot, X, Send, ExternalLink } from "lucide-react";
-import { ChatMessage } from "@/types/ai";
-import { QUICK_ACTIONS } from "@/data/ai/quick-actions";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Bot,
+  X,
+  Send,
+  ExternalLink,
+} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { QUICK_ACTIONS } from "@/data/ai/quick-actions";
+import { ChatMessage } from "@/types/ai";
 
 interface AIChatPanelProps {
   isOpen: boolean;
@@ -40,112 +47,472 @@ export const AIChatPanel = ({
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="fixed bottom-24 right-6 z-50 flex h-[70vh] w-[calc(100vw-48px)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-border bg-surface/90 shadow-2xl backdrop-blur-xl"
+        initial={{
+          opacity: 0,
+          y: 30,
+          scale: 0.96,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        exit={{
+          opacity: 0,
+          y: 20,
+          scale: 0.96,
+        }}
+        transition={{
+          duration: .35,
+        }}
+        className="
+        fixed
+        bottom-24
+        right-6
+        z-[60]
+
+        flex
+        h-[72vh]
+        w-[calc(100vw-48px)]
+        max-w-[420px]
+        flex-col
+        overflow-hidden
+
+        rounded-3xl
+
+        border
+        border-cyan-400/15
+
+        bg-[#0B1220]/95
+
+        backdrop-blur-2xl
+
+        shadow-[0_25px_80px_rgba(0,0,0,.55)]
+
+        "
       >
-        <div className="flex items-center justify-between border-b border-border px-4 py-4">
+
+        {/* Header */}
+
+        <div
+          className="
+          flex
+          items-center
+          justify-between
+
+          border-b
+          border-white/5
+
+          bg-gradient-to-r
+          from-cyan-400/5
+          via-transparent
+          to-purple-500/5
+
+          px-5
+          py-4
+        "
+        >
+
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-cyan/10">
-              <Bot className="h-6 w-6 text-accent-cyan" />
+
+            <div
+              className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+
+              rounded-full
+
+              bg-cyan-400/10
+
+              shadow-[0_0_20px_rgba(34,211,238,.18)]
+            "
+            >
+              <Bot className="h-6 w-6 text-cyan-300" />
             </div>
+
             <div>
-              <h3 className="font-bold text-text-primary">Ask Siam AI</h3>
-              <p className="text-xs text-text-secondary">Your personal portfolio assistant</p>
+
+              <h3 className="font-semibold text-white">
+                Ask Siam AI
+              </h3>
+
+              <p className="text-xs text-slate-400">
+                Personal Portfolio Assistant
+              </p>
+
             </div>
+
           </div>
+
           <button
             onClick={onClose}
-            className="rounded-full p-2 text-text-secondary transition-colors hover:bg-surface-hover hover:text-text-primary"
-            aria-label="Close chat"
+            aria-label="Close AI"
+
+            className="
+            rounded-full
+
+            p-2
+
+            text-slate-400
+
+            transition-all
+
+            hover:bg-white/5
+            hover:text-white
+            "
           >
             <X className="h-5 w-5" />
           </button>
+
         </div>
 
-        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((msg) => (
-            <motion.div
-              key={msg.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
-            >
-              <div
-                className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm shadow-sm ${
-                  msg.role === "user"
-                    ? "bg-accent-cyan text-white"
-                    : "border border-border bg-surface text-text-primary"
+        {/* Chat */}
+
+        <div
+          ref={scrollRef}
+          className="
+          flex-1
+          space-y-5
+          overflow-y-auto
+          p-5
+          "
+        >
+
+          {messages.map((msg) => {
+
+            const isUser = msg.role === "user";
+
+            return (
+
+              <motion.div
+                key={msg.id}
+
+                initial={{
+                  opacity: 0,
+                  y: 12,
+                }}
+
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+
+                className={`flex ${
+                  isUser
+                    ? "justify-end"
+                    : "justify-start"
                 }`}
               >
-                {msg.content}
-              </div>
 
-              {msg.links && msg.links.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2 max-w-[85%]">
-                  {msg.links.map((link, idx) => (
-                    <a
-                      key={idx}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs text-text-primary transition-all hover:border-accent-cyan hover:text-accent-cyan hover:bg-accent-cyan/5"
-                    >
-                      {link.label}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  ))}
+                <div
+                  className={`
+                  max-w-[84%]
+                  rounded-2xl
+                  px-4
+                  py-3
+                  text-sm
+                  leading-7
+
+                  ${
+                    isUser
+                      ? `
+                      bg-gradient-to-r
+                      from-cyan-500
+                      to-sky-500
+
+                      text-white
+
+                      shadow-[0_8px_30px_rgba(34,211,238,.28)]
+                      `
+                      : `
+                      border
+                      border-white/6
+
+                      bg-[#182235]
+
+                      text-slate-100
+
+                      shadow-[0_10px_25px_rgba(0,0,0,.30)]
+                      `
+                  }
+                  `}
+                >
+
+                  {msg.content}
+
                 </div>
-              )}
-            </motion.div>
-          ))}
+                                {msg.links && msg.links.length > 0 && (
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+
+                    {msg.links.map((link, idx) => (
+
+                      <motion.a
+                        key={idx}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+
+                        whileHover={{
+                          y: -2,
+                        }}
+
+                        className="
+                        flex
+                        items-center
+                        gap-2
+
+                        rounded-xl
+
+                        border
+                        border-cyan-400/15
+
+                        bg-cyan-400/5
+
+                        px-3
+                        py-2
+
+                        text-xs
+                        text-cyan-300
+
+                        transition-all
+
+                        hover:border-cyan-400/40
+                        hover:bg-cyan-400/10
+                        "
+                      >
+
+                        {link.label}
+
+                        <ExternalLink className="h-3.5 w-3.5" />
+
+                      </motion.a>
+
+                    ))}
+
+                  </div>
+
+                )}
+
+              </motion.div>
+
+            );
+
+          })}
+
+          {/* Typing Indicator */}
+
           {isTyping && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-1 px-2">
-              <div className="flex gap-1">
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex"
+            >
+
+              <div
+                className="
+                flex
+                items-center
+                gap-1.5
+
+                rounded-2xl
+
+                border
+                border-white/6
+
+                bg-[#182235]
+
+                px-4
+                py-3
+                "
+              >
+
                 {[0, 1, 2].map((i) => (
+
                   <motion.div
                     key={i}
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }}
-                    className="h-1.5 w-1.5 rounded-full bg-text-secondary"
+
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+
+                    transition={{
+                      duration: .7,
+                      repeat: Infinity,
+                      delay: i * .15,
+                    }}
+
+                    className="
+                    h-2
+                    w-2
+                    rounded-full
+                    bg-cyan-300
+                    "
                   />
+
                 ))}
+
               </div>
+
             </motion.div>
+
           )}
+
         </div>
 
-        <div className="border-t border-border bg-surface/50 p-3 overflow-x-auto">
-          <motion.div className="flex gap-2">
+        {/* Quick Actions */}
+
+        <div
+          className="
+          border-t
+          border-white/5
+
+          bg-[#0F172A]
+
+          px-4
+          py-3
+          overflow-x-auto
+          "
+        >
+
+          <div className="flex gap-2">
+
             {QUICK_ACTIONS.map((action) => (
+
               <button
                 key={action.id}
                 onClick={() => onQuickAction(action.action)}
-                className="whitespace-nowrap rounded-full border border-border bg-surface px-3 py-1.5 text-xs transition-colors hover:border-accent-cyan hover:text-accent-cyan"
+
+                className="
+                whitespace-nowrap
+
+                rounded-full
+
+                border
+                border-white/8
+
+                bg-white/[0.03]
+
+                px-3
+                py-2
+
+                text-xs
+                text-slate-300
+
+                transition-all
+
+                hover:border-cyan-400/40
+                hover:bg-cyan-400/10
+                hover:text-cyan-300
+                "
               >
                 {action.label}
               </button>
+
             ))}
-          </motion.div>
+
+          </div>
+
         </div>
 
-        <div className="border-t border-border p-4 bg-surface">
-          <div className="flex gap-2">
+        {/* Input */}
+
+        <div
+          className="
+          border-t
+          border-white/5
+
+          bg-[#111827]
+
+          p-4
+          "
+        >
+
+          <div className="flex items-center gap-3">
+
             <input
               type="text"
+
               value={inputValue}
-              onChange={(e) => onInputChange(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && inputValue.trim() && onSend()}
-              placeholder="Ask me anything..."
-              className="flex-1 rounded-lg border border-border bg-surface px-4 py-2 text-sm focus:border-accent-cyan focus:outline-none"
+
+              onChange={(e) =>
+                onInputChange(e.target.value)
+              }
+
+              onKeyDown={(e) =>
+                e.key === "Enter" &&
+                inputValue.trim() &&
+                onSend()
+              }
+
+              placeholder="Ask anything about Siam..."
+
+              className="
+              flex-1
+
+              rounded-xl
+
+              border
+              border-white/8
+
+              bg-[#1A2438]
+
+              px-4
+              py-3
+
+              text-sm
+              text-white
+
+              placeholder:text-slate-500
+
+              outline-none
+
+              transition-all
+
+              focus:border-cyan-400/40
+              focus:ring-2
+              focus:ring-cyan-400/10
+              "
             />
-            <Button size="sm" onClick={onSend} disabled={!inputValue.trim()}>
+
+            <Button
+              onClick={onSend}
+              disabled={!inputValue.trim()}
+              className="
+              h-11
+              w-11
+
+              rounded-xl
+
+              bg-gradient-to-r
+              from-cyan-500
+              to-sky-500
+
+              p-0
+
+              shadow-[0_8px_25px_rgba(34,211,238,.25)]
+
+              hover:from-cyan-400
+              hover:to-sky-400
+              "
+            >
+
               <Send className="h-4 w-4" />
+
             </Button>
+
           </div>
+
         </div>
+
       </motion.div>
+
     </AnimatePresence>
+
   );
+
 };

@@ -7,11 +7,11 @@ interface AIButtonProps {
 }
 
 /**
- * Premium floating AI assistant button
+ * Premium Floating AI Assistant Button
  */
 export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-[60]">
       <motion.button
         onClick={onClick}
         aria-label="Ask Siam AI"
@@ -19,55 +19,169 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
         animate={{
           scale: 1,
           opacity: 1,
-          y: isOpen ? 0 : [0, -10, 0],
+          y: isOpen ? 0 : [0, -8, 0],
         }}
         transition={{
           y: {
-            duration: 4,
+            duration: 3.8,
             repeat: isOpen ? 0 : Infinity,
             ease: "easeInOut",
           },
-          scale: { duration: 0.3 },
+          scale: {
+            duration: 0.35,
+          },
         }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        className="group relative flex h-16 w-16 items-center justify-center rounded-full border border-border bg-surface glass-surface shadow-[0_4_20px_-4px_rgba(34,211,238,0.4)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.6)]"
+        whileHover={{
+          scale: 1.08,
+        }}
+        whileTap={{
+          scale: 0.95,
+        }}
+        className="
+        group
+        relative
+        flex
+        h-16
+        w-16
+        items-center
+        justify-center
+        overflow-hidden
+        rounded-full
+
+        border
+        border-cyan-400/20
+
+        bg-gradient-to-br
+        from-[#132238]
+        via-[#0f172a]
+        to-[#08111f]
+
+        backdrop-blur-xl
+
+        shadow-[0_10px_35px_rgba(0,0,0,.45)]
+
+        transition-all
+        duration-500
+
+        hover:border-cyan-400/40
+        hover:shadow-[0_0_40px_rgba(34,211,238,.35)]
+      "
       >
+        {/* Glow Ring */}
+
         <motion.div
           animate={{
-            scale: isOpen ? 1 : [1, 1.2, 1],
-            opacity: isOpen ? 0 : [0.3, 0.6, 0.3],
+            scale: isOpen ? 1 : [1, 1.15, 1],
+            opacity: isOpen ? 0 : [0.25, 0.55, 0.25],
           }}
           transition={{
             duration: 2,
             repeat: isOpen ? 0 : Infinity,
           }}
-          className="absolute inset-0 rounded-full border-2 border-accent-cyan/30"
+          className="
+          absolute
+          inset-0
+          rounded-full
+          border
+          border-cyan-400/30
+        "
         />
 
+        {/* Background Glow */}
+
+        <div
+          className="
+          absolute
+          inset-0
+          rounded-full
+          bg-cyan-400/5
+          blur-xl
+        "
+        />
+
+        {/* Notification */}
+
         {!isOpen && (
-          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full border-2 border-surface bg-accent-cyan shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+          <span
+            className="
+            absolute
+            -right-1
+            -top-1
+
+            h-4
+            w-4
+
+            rounded-full
+
+            border-2
+            border-[#08111f]
+
+            bg-cyan-400
+
+            shadow-[0_0_12px_rgba(34,211,238,.8)]
+          "
+          />
         )}
 
-        {isOpen ? (
-          <X className="h-8 w-8 text-accent-cyan" />
-        ) : (
-          <Bot className="h-8 w-8 text-accent-cyan" />
-        )}
+        {/* Icon */}
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileHover={{ opacity: 1, x: 0 }}
-          className="absolute right-full mr-4 hidden whitespace-nowrap rounded-lg border border-border bg-surface px-4 py-2 shadow-xl md:block"
+          animate={{
+            rotate: isOpen ? 180 : 0,
+          }}
+          transition={{
+            duration: 0.35,
+          }}
         >
-          <span className="block font-bold text-text-primary">
+          {isOpen ? (
+            <X className="h-7 w-7 text-cyan-300" />
+          ) : (
+            <Bot className="h-7 w-7 text-cyan-300" />
+          )}
+        </motion.div>
+
+        {/* Tooltip */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 15,
+          }}
+          whileHover={{
+            opacity: 1,
+            x: 0,
+          }}
+          className="
+          absolute
+          right-full
+          mr-4
+          hidden
+          whitespace-nowrap
+
+          rounded-xl
+
+          border
+          border-cyan-400/15
+
+          bg-[#111827]
+
+          px-4
+          py-2
+
+          shadow-2xl
+
+          md:block
+        "
+        >
+          <span className="block font-semibold text-white">
             {isOpen ? "Close AI" : "Ask Siam AI"}
           </span>
-          <span className="block text-xs text-text-secondary">
-            Always here to help
+
+          <span className="block text-xs text-slate-400">
+            Powered by Siam Portfolio
           </span>
         </motion.div>
       </motion.button>
     </div>
   );
-};
+}

@@ -1,6 +1,11 @@
 export type ProjectCategory = "Hardware" | "Software" | "Embedded Systems" | "IoT";
 
 export type ProjectStatus = "Completed" | "In Progress" | "Concept";
+export interface ProjectGalleryItem {
+  image: string;
+  title: string;
+  description: string;
+}
 
 export interface Project {
   id: string;
@@ -34,7 +39,7 @@ export interface Project {
   /** public/assets/projects/<slug>/cover.webp — falls back to a themed placeholder until set. */
   coverImage: string | null;
   /** public/assets/projects/<slug>/gallery-01.webp, etc. Empty array hides the gallery entirely. */
-  gallery: string[];
+  gallery: ProjectGalleryItem[];
   /** Marks a project for the larger flagship case-study layout. */
   featured: boolean;
 }
