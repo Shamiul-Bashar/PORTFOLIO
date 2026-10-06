@@ -251,3 +251,4 @@ This project stops here awaiting approval before Phase 11 begins.
   to `src/data/achievements.ts`; new icons are wired through the
   `ACHIEVEMENT_ICONS` / `LEARNING_ICONS` maps in the section component,
   same pattern as Education's `ICONS` map.
+
