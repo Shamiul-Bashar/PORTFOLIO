@@ -1,45 +1,24 @@
 import type { AchievementEntry, LearningItem } from "@/types/achievement";
 
 /**
- * Milestones only — day-to-day coursework lives in src/data/education.ts.
- * Add a new entry here any time something is won, selected, or
- * completed; the section re-sorts nothing automatically, so keep the
- * array in the chronological order you want displayed.
- *
- * TODO: the two Olympiad entries below use placeholder years. Confirm
- * the exact year, host organization, and any round/placement reached,
- * then update `date` and `description` accordingly.
+ * Publicly verified milestones only.
+ * The original profile also listed selection at the Divisional Physics
+ * and Mathematics Olympiads, but those entries contained explicitly
+ * placeholder years (2020 and 2021). Re-add them after the owner confirms
+ * the years, stage and outcome, instead of publishing guessed dates.
  */
 export const ACHIEVEMENTS: AchievementEntry[] = [
   {
-    id: "divisional-physics-olympiad",
-    title: "Divisional Physics Olympiad — Selected",
-    description:
-      "Selected for the Divisional Physics Olympiad after clearing school and district rounds.",
-    date: "2020",
-    category: "Competition",
-  },
-  {
-    id: "divisional-math-olympiad",
-    title: "Divisional Math Olympiad — Selected",
-    description:
-      "Selected for the Divisional Mathematics Olympiad, representing the school beyond the district level.",
-    date: "2021",
-    category: "Competition",
-  },
-  {
     id: "ssc-result",
-    title: "SSC — G.P.A : 5.00",
-    description:
-      "Completed the Secondary School Certificate at Kushtia Zilla School with the highest grade.",
+    title: "SSC — GPA 5.00",
+    description: "Completed the Secondary School Certificate at Kushtia Zilla School with the highest grade.",
     date: "2022",
     category: "Academic",
   },
   {
     id: "hsc-result",
-    title: "HSC — G.P.A : 5.00",
-    description:
-      "Completed the Higher Secondary Certificate at Cantonment College, Jashore with the highest grade.",
+    title: "HSC — GPA 5.00",
+    description: "Completed the Higher Secondary Certificate at Cantonment College, Jashore with the highest grade.",
     date: "2024",
     category: "Academic",
   },
