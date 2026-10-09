@@ -195,7 +195,7 @@ export function Footer() {
               <p className="text-sm text-text-secondary">
                 © {new Date().getFullYear()}{" "}
                 <span className="font-medium text-text-primary">
-                  MD. Shamiul Basher Siam
+                  MD. Shamiul Bashar Siam
                 </span>
                 . All Rights Reserved.
               </p>
