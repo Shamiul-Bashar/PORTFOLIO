@@ -15,7 +15,6 @@ import {
 import type { IconType } from "react-icons";
 
 import { Container } from "@/components/ui/container";
-import { ParticleField } from "@/components/ui/particle-field";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { gsap } from "@/animations/gsap";
 import { ACHIEVEMENTS, CURRENTLY_LEARNING } from "@/data/achievements";
@@ -107,10 +106,9 @@ export function Achievements() {
       className="relative scroll-mt-(--nav-height) overflow-hidden py-28"
     >
       <div aria-hidden="true" className="bg-bg-primary absolute inset-0 -z-20" />
-      <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-purple/10 absolute top-1/3 left-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>
