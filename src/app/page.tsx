@@ -1,4 +1,5 @@
 import { Hero } from "@/sections/hero/hero";
+import { ScrollCinematics } from "@/components/ui/scroll-cinematics";
 import { Skills } from "@/sections/skills/skills";
 import { ProjectsSection } from "@/sections/projects/projects";
 import { FocusAreas } from "@/sections/focus/focus-areas";
@@ -11,6 +12,7 @@ import { Contact } from "@/sections/contact";
 export default function Home() {
   return (
     <>
+      <ScrollCinematics />
       <Hero />
       <Skills />
       <ProjectsSection />
