@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaDownload } from "react-icons/fa6";
+import { FaArrowRight, FaDownload } from "react-icons/fa6";
 
 import { Container } from "@/components/ui/container";
 import { MagneticButton } from "@/components/ui/magnetic-button";
@@ -26,195 +26,122 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen scroll-mt-(--nav-height) items-center overflow-hidden py-32"
+      className="relative isolate flex min-h-screen scroll-mt-(--nav-height) items-center overflow-hidden pt-32 pb-24 lg:pt-28 lg:pb-16"
     >
       <HeroBackground />
 
-    <Container className="relative z-10 grid min-h-[88vh] items-center gap-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <Container className="relative z-10 grid w-full items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+        <motion.div
+          variants={staggerContainer(0.13, 0.2)}
+          initial="hidden"
+          animate="visible"
+          className="order-1 flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left"
+        >
+          <motion.div variants={fadeInUp}>
+            <span className="inline-flex items-center gap-3 rounded-full border border-accent-cyan/25 bg-accent-cyan/[0.06] px-4 py-2 font-mono text-[10px] font-medium tracking-[0.21em] uppercase text-accent-cyan sm:text-xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan shadow-[var(--glow-cyan-soft)] motion-safe:animate-pulse" />
+              Portfolio / 2026
+            </span>
+          </motion.div>
 
-  {/* ===========================
-      LEFT CONTENT
-  ============================ */}
+          <motion.p
+            variants={fadeInUp}
+            className="mt-9 font-mono text-sm tracking-[0.24em] uppercase text-text-secondary sm:text-base"
+          >
+            Hello, I&apos;m
+          </motion.p>
 
-  <motion.div
-    variants={staggerContainer(0.12, 0.15)}
-    initial="hidden"
-    animate="visible"
-    className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left"
-  >
+          <motion.div variants={fadeInUp} className="mt-3 w-full">
+            <NameReveal text={profile.fullName} />
+          </motion.div>
 
-    {/* Small Intro */}
+          <motion.div variants={fadeInUp} className="mt-6">
+            <RotatingTitles titles={profile.titles} />
+          </motion.div>
 
-    <motion.div variants={fadeInUp}>
-      <span className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/20 bg-accent-cyan/5 px-5 py-2">
+          <motion.p
+            variants={fadeInUp}
+            className="mt-7 max-w-[590px] text-sm leading-7 text-text-secondary sm:text-base sm:leading-8"
+          >
+            {profile.heroIntro}
+          </motion.p>
 
-        <span className="h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_12px_var(--color-accent-cyan)]" />
+          <motion.div
+            variants={fadeInUp}
+            className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+          >
+            <MagneticButton
+              href="#projects"
+              variant="primary"
+              size="lg"
+              className="shadow-[var(--glow-cyan-soft)]"
+            >
+              View My Work <FaArrowRight aria-hidden="true" />
+            </MagneticButton>
+            <MagneticButton href={profile.cvUrl} external variant="secondary" size="lg">
+              <FaDownload aria-hidden="true" /> Download Resume
+            </MagneticButton>
+            <MagneticButton href="#contact" variant="ghost" size="lg">
+              Contact Me
+            </MagneticButton>
+          </motion.div>
 
-        <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent-cyan">
-          Welcome To My Portfolio
-        </span>
+          <motion.div variants={fadeInUp} className="mt-8">
+            <SocialIcons />
+          </motion.div>
 
-      </span>
-    </motion.div>
+          <motion.div
+            variants={fadeInUp}
+            className="mt-10 flex items-center gap-3 border-t border-accent-cyan/15 pt-5 font-mono text-[10px] tracking-[0.18em] uppercase text-text-secondary"
+          >
+            <span className="h-px w-7 bg-accent-cyan/70" />
+            Built with purpose. Powered by curiosity.
+          </motion.div>
+        </motion.div>
 
-    {/* Name */}
+        <motion.div
+          initial={{ opacity: 0, x: 48, scale: 0.94 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1.05, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          className="relative order-2 mx-auto flex w-full max-w-[470px] items-center justify-center py-8 lg:py-16"
+        >
+          <div
+            aria-hidden="true"
+            className="absolute aspect-square w-[min(92vw,460px)] rounded-full border border-accent-cyan/10"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute aspect-square w-[min(82vw,410px)] rounded-full border border-dashed border-accent-cyan/15"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute aspect-square w-[min(75vw,380px)] rounded-full bg-accent-cyan/[0.085] blur-[90px]"
+          />
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="relative z-10"
+          >
+            <ProfilePortrait
+              src={profile.profileImageSrc}
+              alt={profile.fullName}
+              initials={initials}
+              size="lg"
+              priority
+            />
+          </motion.div>
+          <div className="absolute right-0 bottom-0 z-20 rounded-xl border border-accent-cyan/25 bg-bg-secondary/95 px-5 py-3 shadow-[var(--shadow-elevation-2)] backdrop-blur-lg sm:right-1">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-cyan">
+              Current Focus
+            </p>
+            <p className="mt-1 text-xs font-medium text-text-primary">CSE · KUET</p>
+          </div>
+        </motion.div>
+      </Container>
 
-    <motion.div
-      variants={fadeInUp}
-      className="mt-8"
-    >
-      <NameReveal text={profile.fullName} />
-    </motion.div>
-
-    {/* Rotating Titles */}
-
-    <motion.div
-      variants={fadeInUp}
-      className="mt-6"
-    >
-      <RotatingTitles titles={profile.titles} />
-    </motion.div>
-
-    {/* Hero Intro */}
-
-    <motion.p
-      variants={fadeInUp}
-      className="text-text-secondary mt-8 max-w-2xl text-lg leading-8 lg:text-xl"
-    >
-      {profile.heroIntro}
-    </motion.p>
-
-    {/* CTA */}
-
-    <motion.div
-      variants={fadeInUp}
-      className="mt-12 flex flex-wrap items-center justify-center gap-5 lg:justify-start"
-    >
-
-      <MagneticButton
-        href={profile.cvUrl}
-        external
-        variant="primary"
-        size="lg"
-        className="shadow-[var(--glow-cyan)]"
-      >
-        <FaDownload
-          className="text-lg"
-          aria-hidden="true"
-        />
-        Download Resume
-      </MagneticButton>
-
-      <MagneticButton
-        href="#projects"
-        variant="secondary"
-        size="lg"
-      >
-        View Projects
-      </MagneticButton>
-
-      <MagneticButton
-        href="#contact"
-        variant="ghost"
-        size="lg"
-      >
-        Contact Me
-      </MagneticButton>
-
-    </motion.div>
-
-    {/* Social */}
-
-    <motion.div
-      variants={fadeInUp}
-      className="mt-12"
-    >
-      <SocialIcons />
-    </motion.div>
-
-  </motion.div>
-
-  {/* ===========================
-      RIGHT CONTENT
-  ============================ */}
-
-       {/* ===========================
-    RIGHT CONTENT
-=========================== */}
-
-<motion.div
-  initial={{
-    opacity: 0,
-    x: 80,
-    scale: 0.9,
-  }}
-  animate={{
-    opacity: 1,
-    x: 0,
-    scale: 1,
-  }}
-  transition={{
-    duration: 1.1,
-    ease: [0.16, 1, 0.3, 1],
-    delay: 0.35,
-  }}
-  className="relative order-1 flex items-center justify-center lg:order-2"
->
-
-  {/* Ambient Glow */}
-
-  <div
-    aria-hidden
-    className="absolute h-[520px] w-[520px] rounded-full bg-accent-cyan/10 blur-[120px]"
-  />
-
-  <div
-    aria-hidden
-    className="absolute h-[420px] w-[420px] rounded-full bg-accent-purple/10 blur-[100px]"
-  />
-
-  {/* Portrait */}
-
-  <motion.div
-    animate={{
-      y: [0, -10, 0],
-    }}
-    transition={{
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  >
-    <ProfilePortrait
-      src={profile.profileImageSrc}
-      alt={profile.fullName}
-      initials={initials}
-      size="lg"
-      priority
-    />
-  </motion.div>
-
-</motion.div>
-
-</Container>
-
-{/* Scroll Indicator */}
-
-<motion.div
-  initial={{
-    opacity: 0,
-  }}
-  animate={{
-    opacity: 1,
-  }}
-  transition={{
-    delay: 1.5,
-    duration: 1,
-  }}
->
-  <ScrollIndicator />
-</motion.div>
-      <ScrollIndicator />
+      <div className="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 lg:block">
+        <ScrollIndicator />
+      </div>
     </section>
   );
 }
