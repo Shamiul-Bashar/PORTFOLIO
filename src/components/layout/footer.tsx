@@ -2,6 +2,7 @@
 
 import { FaArrowUp, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { Container } from "@/components/ui/container";
+import { MotionLine } from "@/components/ui/motion-line";
 import { SocialIcons } from "@/components/ui/social-icons";
 import { profile } from "@/data/profile";
 
@@ -18,7 +19,7 @@ export function Footer() {
         <div className="grid gap-12 py-16 lg:grid-cols-[1fr_.65fr] lg:items-start lg:py-20">
           <div>
             <a href="#home" className="inline-block font-heading text-[clamp(6rem,15vw,16rem)] leading-[.78] tracking-[-.018em] text-white">
-              SIAM<span className="text-accent-cyan">.</span>
+              <MotionLine><span>SIAM<span className="text-accent-cyan">.</span></span></MotionLine>
             </a>
             <p className="mt-5 text-[11px] font-semibold tracking-[.19em] uppercase text-white/45">
               THINK DEEPLY. BUILD WITH PURPOSE.
