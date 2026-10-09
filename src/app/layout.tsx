@@ -28,17 +28,17 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const SITE_TITLE = "MD Shamiul Bashar Siam — Software Engineering Portfolio";
+const SITE_TITLE = "MD. Shamiul Basher Siam — Software Engineering Portfolio";
 const SITE_DESCRIPTION =
-  "Portfolio of MD Shamiul Bashar Siam, CSE undergraduate at KUET. Exploring software engineering, problem solving and reliable systems.";
+  "Portfolio of MD. Shamiul Basher Siam, CSE undergraduate at KUET. Exploring software engineering, problem solving and reliable systems.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: SITE_TITLE, template: "%s — Shamiul Bashar Siam" },
+  title: { default: SITE_TITLE, template: "%s — Shamiul Basher Siam" },
   description: SITE_DESCRIPTION,
   openGraph: {
     title: SITE_TITLE, description: SITE_DESCRIPTION,
-    url: SITE_URL, siteName: "Shamiul Bashar Siam", locale: "en_US", type: "website",
+    url: SITE_URL, siteName: "Shamiul Basher Siam", locale: "en_US", type: "website",
   },
   twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
 };
