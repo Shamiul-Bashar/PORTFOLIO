@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, FileText, FolderCode, Github, ExternalLink } from "lucide-react";
+import { FaArrowUpRightFromSquare, FaFileLines, FaFolderClosed, FaGithub, FaArrowUpRightFromSquare as FaExternalLink } from "react-icons/fa6";
 import type { Project } from "@/types/project";
 
 export interface ProjectCardProps {
@@ -30,7 +30,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
           />
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-3 bg-[#202020]">
-            <FolderCode size={37} strokeWidth={1} className="text-accent-cyan/55" aria-hidden="true" />
+            <FaFolderClosed size={37} strokeWidth={1} className="text-accent-cyan/55" aria-hidden="true" />
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary">
               Project / {project.year}
             </span>
@@ -77,26 +77,26 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
             className="group/action flex h-11 w-full items-center justify-between rounded-[5px] border border-accent-cyan/45 px-4 text-left text-xs font-bold text-accent-cyan transition-colors hover:border-accent-cyan hover:bg-accent-cyan hover:text-[#0a0a0a]"
           >
             Explore Project Details
-            <ArrowUpRight size={17} className="transition-transform group-hover/action:-translate-y-0.5 group-hover/action:translate-x-0.5" aria-hidden="true" />
+            <FaArrowUpRightFromSquare size={17} className="transition-transform group-hover/action:-translate-y-0.5 group-hover/action:translate-x-0.5" aria-hidden="true" />
           </button>
           {(project.githubUrl || project.reportUrl || project.liveDemoUrl) && (
             <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
               {project.githubUrl && (
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
-                  <Github size={14} aria-hidden="true" /> Source
+                  <FaGithub size={14} aria-hidden="true" /> Source
                 </a>
               )}
               {project.reportUrl && (
                 <a href={project.reportUrl} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
-                  <FileText size={14} aria-hidden="true" /> Report
+                  <FaFileLines size={14} aria-hidden="true" /> Report
                 </a>
               )}
               {project.liveDemoUrl && (
                 <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
-                  <ExternalLink size={14} aria-hidden="true" /> Live Demo
+                  <FaExternalLink size={14} aria-hidden="true" /> Live Demo
                 </a>
               )}
             </div>
