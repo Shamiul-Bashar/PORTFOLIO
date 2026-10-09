@@ -48,10 +48,10 @@ export function ContactInfo() {
               </p>
 
               <a
-                href="mailto:siambashar@gmail.com"
+                href="mailto:siambasher@gmail.com"
                 className="text-text-primary transition hover:text-accent-cyan"
               >
-                siambashar@gmail.com
+                siambasher@gmail.com
               </a>
 
             </div>
