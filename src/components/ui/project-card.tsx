@@ -1,9 +1,9 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaGithub, FaFileLines, FaArrowUpRightFromSquare, FaFolderClosed } from "react-icons/fa6";
-import { Project } from "@/types/project";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { ArrowUpRight, FileText, FolderCode2, Github, ExternalLink } from "lucide-react";
+import type { Project } from "@/types/project";
 
 export interface ProjectCardProps {
   project: Project;
@@ -11,143 +11,98 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onOpen }: ProjectCardProps) {
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
-      case "in progress":
-        return "bg-yellow-500/15 text-yellow-300 border-yellow-400/30";
-      default:
-        return "bg-surface text-text-secondary border-border";
-    }
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl glass-surface border border-border transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(250,204,21,0.16)]"
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.52, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-[10px] border border-white/10 bg-[#151515] transition-colors duration-300 hover:border-accent-cyan/40"
     >
-      {/* Cover Image Container */}
-      <div className="relative aspect-video w-full overflow-hidden bg-surface">
+      <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10 bg-[#1e1e1e]">
         {project.coverImage ? (
           <Image
             src={project.coverImage}
             alt={project.title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-surface transition-transform duration-500 group-hover:scale-110">
-            <FaFolderClosed className="h-12 w-12 text-text-secondary opacity-50" />
+          <div className="flex h-full flex-col items-center justify-center gap-3 bg-[#202020]">
+            <FolderCode2 size={37} strokeWidth={1} className="text-accent-cyan/55" aria-hidden="true" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary">
+              Project / {project.year}
+            </span>
           </div>
         )}
-
-        {/* Status Badge */}
-        <div
-          className={cn(
-            "absolute left-3 top-3 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-md",
-            getStatusColor(project.status)
-          )}
-        >
+        {project.featured && (
+          <span className="absolute top-4 left-4 rounded-[3px] border border-accent-cyan/50 bg-[#0a0a0a]/85 px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.15em] text-accent-cyan">
+            Featured Project
+          </span>
+        )}
+        <span className="absolute right-4 bottom-4 rounded-[3px] bg-[#0a0a0a]/85 px-3 py-1.5 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-white/75">
           {project.status}
-        </div>
+        </span>
       </div>
 
-      {/* Content Container */}
-      <div className="flex flex-grow flex-col gap-4 p-5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan">
-            {project.category}
-          </span>
-          <span className="text-xs text-text-secondary">{project.year}</span>
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-accent-cyan">{project.category}</span>
+          <span className="font-mono text-[10px] tracking-[0.05em] text-text-secondary">{project.year}</span>
         </div>
-
-        <h3 className="text-xl font-bold text-text-primary transition-colors group-hover:text-accent-cyan">
+        <h3 className="mt-4 font-heading text-[19px] font-bold leading-[1.4] tracking-[-0.045em] text-text-primary transition-colors group-hover:text-accent-cyan sm:text-[22px]">
           {project.title}
         </h3>
-
-        <p className="line-clamp-2 text-sm text-text-secondary">
+        <p className="mt-3 line-clamp-3 text-[13px] leading-[1.85] text-text-secondary">
           {project.shortDescription}
         </p>
-
-        {/* Technologies */}
-        <div className="mt-auto flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           {project.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-surface border border-border px-2.5 py-1 text-[10px] font-medium text-text-secondary transition-colors"
-            >
+            <span key={tech} className="rounded-[4px] border border-white/10 bg-white/[0.025] px-2.5 py-1.5 text-[10px] text-text-secondary">
               {tech}
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="rounded-full bg-surface border border-border px-2.5 py-1 text-[10px] font-medium text-text-secondary">
+            <span className="rounded-[4px] border border-white/10 px-2.5 py-1.5 text-[10px] text-text-secondary">
               +{project.technologies.length - 4}
             </span>
           )}
         </div>
 
-        {/* Footer / Actions */}
-        <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
-          <Button
+        <div className="mt-auto pt-7">
+          <button
+            type="button"
             onClick={() => onOpen(project)}
-            variant="outline"
-            className="w-full transition-all group-hover:border-accent-cyan group-hover:text-accent-cyan"
+            className="group/action flex h-11 w-full items-center justify-between rounded-[5px] border border-accent-cyan/45 px-4 text-left text-xs font-bold text-accent-cyan transition-colors hover:border-accent-cyan hover:bg-accent-cyan hover:text-[#0a0a0a]"
           >
-            View Details
-          </Button>
-
-          <div className="flex flex-wrap gap-2">
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Source Code"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaGithub className="mr-2 h-4 w-4" />
-                  GitHub
-                </Button>
-              </a>
-            )}
-            {project.reportUrl && (
-              <a
-                href={project.reportUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Project Report"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaFileLines className="mr-2 h-4 w-4" />
-                  Report
-                </Button>
-              </a>
-            )}
-            {project.liveDemoUrl && (
-              <a
-                href={project.liveDemoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Live Demo"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaArrowUpRightFromSquare className="mr-2 h-4 w-4" />
-                  Live Demo
-                </Button>
-              </a>
-            )}
-          </div>
+            Explore Project Details
+            <ArrowUpRight size={17} className="transition-transform group-hover/action:-translate-y-0.5 group-hover/action:translate-x-0.5" aria-hidden="true" />
+          </button>
+          {(project.githubUrl || project.reportUrl || project.liveDemoUrl) && (
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+              {project.githubUrl && (
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
+                  <Github size={14} aria-hidden="true" /> Source
+                </a>
+              )}
+              {project.reportUrl && (
+                <a href={project.reportUrl} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
+                  <FileText size={14} aria-hidden="true" /> Report
+                </a>
+              )}
+              {project.liveDemoUrl && (
+                <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent-cyan">
+                  <ExternalLink size={14} aria-hidden="true" /> Live Demo
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
