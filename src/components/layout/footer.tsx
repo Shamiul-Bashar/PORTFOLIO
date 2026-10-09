@@ -36,8 +36,8 @@ export function Footer() {
             </div>
             <div>
               <p className="mb-5 text-[10px] font-bold tracking-[.18em] uppercase text-accent-cyan">CONNECT</p>
-              <a href="mailto:siambashar@gmail.com" className="inline-flex items-center gap-2 break-all text-[12px] text-white/70 transition-colors hover:text-accent-cyan">
-                siambashar@gmail.com <FaArrowUpRightFromSquare size={12} />
+              <a href="mailto:siambasher@gmail.com" className="inline-flex items-center gap-2 break-all text-[12px] text-white/70 transition-colors hover:text-accent-cyan">
+                siambasher@gmail.com <FaArrowUpRightFromSquare size={12} />
               </a>
               <p className="mt-3 text-[12px] text-white/45">{profile.location.present}</p>
               <div className="mt-5"><SocialIcons /></div>
