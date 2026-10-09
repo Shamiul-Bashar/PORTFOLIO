@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 
 import { ContactSocial } from "./contact-social";
@@ -48,7 +48,7 @@ export function ContactInfo() {
               </p>
 
               <a
-                href="mailto:siam2407118@stud.kuet.ac.bd"
+                href="mailto:siambashar@gmail.com"
                 className="text-text-primary transition hover:text-accent-cyan"
               >
                 siambashar@gmail.com
@@ -109,21 +109,15 @@ export function ContactInfo() {
 
       <div className="mt-10">
 
-        <Button
-          asChild
-          className="mb-8 w-full"
+        <a
+          href={profile.cvUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={buttonVariants({ variant: "primary", size: "lg" }) + " mb-8 w-full"}
         >
-          <a
-            href={profile.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFileDownload />
-
-            Download Resume
-
-          </a>
-        </Button>
+          <FaFileDownload aria-hidden="true" />
+          Download Resume
+        </a>
 
         <ContactSocial />
 
