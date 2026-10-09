@@ -124,7 +124,7 @@ export const PROJECTS: Project[] = [
     ],
 
     githubUrl:
-      "https://github.com/Shamiul-Bashar/hydro-smart",
+      null,
 
     reportUrl:
       "https://docs.google.com/document/d/1iVcZhEgZxM8fq72W6Ye1nkd8G2H8RmvZ/edit?usp=drive_link&ouid=112896375024836367928&rtpof=true&sd=true",
@@ -250,7 +250,7 @@ export const PROJECTS: Project[] = [
     ],
 
     githubUrl:
-      "https://github.com/Shamiul-Bashar/hardware-number-guesser",
+      null,
 
     reportUrl:
       "https://docs.google.com/document/d/1XE7yeqV570L2M5PPMKwoMV_cYSGOFufN/edit?usp=drive_link&ouid=112896375024836367928&rtpof=true&sd=true",
