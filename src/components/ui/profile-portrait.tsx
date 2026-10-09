@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 
 interface ProfilePortraitProps {
@@ -10,88 +9,59 @@ interface ProfilePortraitProps {
   alt: string;
   initials: string;
   size?: "lg" | "md";
+  variant?: "round" | "editorial";
   className?: string;
   priority?: boolean;
 }
 
 export function ProfilePortrait({
-  src,
-  alt,
-  initials,
-  size = "lg",
-  className,
-  priority,
+  src, alt, initials, size = "lg", variant = "round", className, priority,
 }: ProfilePortraitProps) {
-  const dimension = size === "lg" ? 380 : 260;
+  const isEditorial = variant === "editorial";
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={cn("relative mx-auto", className)}
-      style={{
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        "relative mx-auto shrink-0 overflow-hidden border bg-[#181818]",
+        isEditorial
+          ? "aspect-[4/4.65] w-full max-w-[420px] rounded-[9px] border-white/10"
+          : "aspect-square rounded-full border-white/15",
+        className,
+      )}
+      style={isEditorial ? undefined : {
         width: size === "lg" ? "min(76vw, 380px)" : "min(68vw, 260px)",
-        aspectRatio: "1 / 1",
       }}
     >
-      {/* Glow */}
-
-      <div
-        aria-hidden
-        className="absolute -inset-14 rounded-full bg-accent-cyan/10 blur-[90px]"
-      />
-
-      <div
-        aria-hidden
-        className="absolute -inset-8 rounded-full bg-accent-purple/10 blur-[70px]"
-      />
-
-      {/* Border */}
-
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent-cyan via-accent-purple to-accent-cyan p-[2px]">
-
-        <div className="glass-surface relative h-full w-full overflow-hidden rounded-full">
-
-          {src ? (
-            <>
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes={`${dimension}px`}
-                className="object-cover transition-transform duration-500 hover:scale-105"
-              />
-
-              {/* Reflection */}
-
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-transparent"
-              />
-            </>
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-bg-secondary to-surface">
-
-              <span className="font-heading text-6xl font-bold text-white/80">
-                {initials}
-              </span>
-
-            </div>
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={isEditorial ? "(max-width: 1024px) 88vw, 420px" : "(max-width: 768px) 260px, 380px"}
+          className={cn(
+            "object-cover object-top transition-transform duration-700",
+            isEditorial
+              ? "grayscale-[0.22] contrast-[1.06] hover:scale-[1.025]"
+              : "hover:scale-[1.035]",
           )}
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-[#202020]">
+          <span className="font-heading text-6xl font-extrabold tracking-tight text-accent-cyan">
+            {initials}
+          </span>
         </div>
-      </div>
-
-      {/* Soft Inner Ring */}
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-4 rounded-full border border-white/10"
-      />
+      )}
+      {isEditorial && (
+        <>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/55 to-transparent" aria-hidden="true" />
+          <span aria-hidden="true" className="absolute right-0 bottom-0 h-[3px] w-20 bg-accent-cyan" />
+        </>
+      )}
     </motion.div>
   );
 }
