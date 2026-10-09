@@ -35,12 +35,15 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    // Keep a stable ticker function, otherwise StrictMode/hot reload can
+    // accumulate duplicate animation frames and make scrolling feel heavy.
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(tick);
+      lenis.off("scroll", ScrollTrigger.update);
       lenis.destroy();
       lenisRef.current = null;
     };
