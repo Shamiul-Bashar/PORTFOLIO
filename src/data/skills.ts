@@ -1,6 +1,6 @@
 import {
   SiCplusplus, SiGit, SiGithub, SiTypescript,
-  SiJavascript, SiReact, SiNodedotjs, SiHtml5, SiCss3,
+  SiJavascript, SiReact, SiNodedotjs, SiHtml5, SiCss,
   SiNextdotjs, SiCmake,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
@@ -20,7 +20,7 @@ export const SKILLS: Skill[] = [
   { id: "react", name: "React", category: "Web Development", icon: SiReact, description: "Interactive interfaces for software and simulation projects." },
   { id: "nextjs", name: "Next.js", category: "Web Development", icon: SiNextdotjs, description: "App Router architecture and this personal portfolio." },
   { id: "html", name: "HTML", category: "Web Development", icon: SiHtml5, description: "Semantic page structure and accessible markup." },
-  { id: "css", name: "CSS", category: "Web Development", icon: SiCss3, description: "Responsive layouts, styling and motion fundamentals." },
+  { id: "css", name: "CSS", category: "Web Development", icon: SiCss, description: "Responsive layouts, styling and motion fundamentals." },
   { id: "node", name: "Node.js", category: "Web Development", icon: SiNodedotjs, description: "Basic server-side JavaScript and project API integration." },
 
   { id: "git", name: "Git", category: "Tools", icon: SiGit, description: "Version control, branching and project workflows." },
