@@ -10,47 +10,47 @@
 
 :root {
   /* ---- Color: surfaces ------------------------------------------ */
-  --color-bg-primary: #050816;
-  --color-bg-secondary: #0d1021;
-  --color-surface: #111827;
+  --color-bg-primary: #090909;
+  --color-bg-secondary: #0e0e0c;
+  --color-surface: #171714;
 
   /* ---- Color: accents --------------------------------------------- */
-  --color-accent-cyan: #00f5ff;
-  --color-accent-purple: #8a2eff;
-  --color-highlight: #4fc3f7;
+  --color-accent-cyan: #facc15;
+  --color-accent-purple: #d4a90b;
+  --color-highlight: #ffe075;
   --color-danger: #ff4d6d;
   --color-success: #00e676;
 
   /* ---- Color: text -------------------------------------------------- */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #b6c2cf;
+  --color-text-secondary: #b5b3aa;
   /* ---- AI Chat -------------------------------------------------- */
 
---chat-bg: #0b1220;
---chat-panel: #111827;
+--chat-bg: #0e0e0c;
+--chat-panel: #171714;
 
---chat-ai: #182235;
---chat-ai-hover: #1d2a42;
+--chat-ai: #1b1a15;
+--chat-ai-hover: #252217;
 
---chat-user-start: #06b6d4;
---chat-user-end: #0ea5e9;
+--chat-user-start: #eab308;
+--chat-user-end: #facc15;
 
---chat-input: #101827;
+--chat-input: #171714;
 
 --chat-border: rgba(255,255,255,.08);
 
 --chat-shadow: 0 20px 60px rgba(0,0,0,.55);
 --chat-shadow-soft: 0 10px 25px rgba(0,0,0,.35);
---chat-glow: 0 0 25px rgba(34,211,238,.18);
+--chat-glow: 0 0 25px rgba(250,204,21,.15);
 
---chat-scroll: #22d3ee;
+--chat-scroll: #facc15;
 
   /* ---- Color: borders & glow ----------------------------------------- */
-  --color-border: rgba(255, 255, 255, 0.08);
-  --glow-cyan: 0 0 24px rgba(0, 245, 255, 0.35);
-  --glow-cyan-soft: 0 0 12px rgba(0, 245, 255, 0.2);
-  --glow-purple: 0 0 24px rgba(138, 46, 255, 0.35);
-  --glow-purple-soft: 0 0 12px rgba(138, 46, 255, 0.2);
+  --color-border: rgba(250, 204, 21, 0.12);
+  --glow-cyan: 0 0 24px rgba(250, 204, 21, 0.24);
+  --glow-cyan-soft: 0 0 12px rgba(250, 204, 21, 0.16);
+  --glow-purple: 0 0 24px rgba(212, 169, 11, 0.22);
+  --glow-purple-soft: 0 0 12px rgba(212, 169, 11, 0.13);
 
   /* ---- Typography ------------------------------------------------- */
   --font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
@@ -182,8 +182,8 @@ kbd {
 }
 
 ::selection {
-  background: var(--color-accent-purple);
-  color: var(--color-text-primary);
+  background: var(--color-accent-cyan);
+  color: var(--color-bg-primary);
 }
 
 /* Thin scrollbar that matches the cyberpunk surface, desktop only. */
@@ -225,3 +225,25 @@ kbd {
     scroll-behavior: auto !important;
   }
 }
+
+/* Matte-black / gold finishing details. */
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.glass-surface {
+  background: rgba(23, 23, 20, 0.74);
+  border-color: rgba(250, 204, 21, 0.12);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+}
+
+.glass-surface:hover {
+  border-color: rgba(250, 204, 21, 0.22);
+}
+
+body {
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(250, 204, 21, 0.025), transparent 55%);
+}
+
