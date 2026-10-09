@@ -1,66 +1,71 @@
 "use client";
 
-import { motion } from "framer-motion";
-
+import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { EASE } from "@/lib/motion";
 
 interface NameRevealProps {
   text: string;
 }
 
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.035, delayChildren: 0.15 },
-  },
-};
-
-const letter = {
-  hidden: { y: "115%" },
-  visible: {
-    y: "0%",
-    transition: { duration: 0.75, ease: EASE.premium },
-  },
-};
-
+/**
+ * Accessible, one-pass typewriter reveal. The complete heading is
+ * exposed to screen readers while the visual animation remains decorative.
+ */
 export function NameReveal({ text }: NameRevealProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [visibleCount, setVisibleCount] = useState(0);
 
-  if (prefersReducedMotion) {
-    return (
-      <h1 className="font-heading text-text-primary text-4xl font-semibold sm:text-6xl lg:text-7xl">
-        {text}
-      </h1>
-    );
-  }
+  const name = text.trim().replace(/\s+/g, " ").toUpperCase();
+  const words = name.split(" ");
+  const firstLine = words.slice(0, 2).join(" ");
+  const secondLine = words.slice(2).join(" ");
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const timer = window.setInterval(() => {
+      setVisibleCount((count) => {
+        if (count >= name.length) {
+          window.clearInterval(timer);
+          return count;
+        }
+        return count + 1;
+      });
+    }, 82);
+    return () => window.clearInterval(timer);
+  }, [name, prefersReducedMotion]);
+
+  const count = prefersReducedMotion ? name.length : visibleCount;
+  const firstVisible = firstLine.slice(0, count);
+  const secondVisible = secondLine.slice(
+    0,
+    Math.max(0, count - firstLine.length - 1),
+  );
+  const onFirstLine = count <= firstLine.length;
+  const cursor = (
+    <span
+      aria-hidden="true"
+      className="ml-1 inline-block h-[0.77em] w-[0.055em] translate-y-[0.07em] bg-accent-cyan align-baseline motion-safe:animate-[caret-blink_1s_steps(1,end)_infinite]"
+    />
+  );
 
   return (
-    <motion.h1
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className="font-heading text-text-primary text-4xl font-semibold sm:text-6xl lg:text-7xl"
-      aria-label={text}
+    <h1
+      aria-label={name}
+      className="font-heading text-[clamp(1.95rem,5.9vw,5.65rem)] font-bold leading-[1.09] tracking-[-0.055em] uppercase text-text-primary"
     >
-      {text.split(" ").map((word, wordIndex) => (
+      <span aria-hidden="true" className="block min-h-[1.12em] whitespace-nowrap">
+        {firstVisible}
+        {!prefersReducedMotion && onFirstLine ? cursor : null}
+      </span>
+      {secondLine && (
         <span
-          key={`${word}-${wordIndex}`}
-          className="mr-[0.28em] inline-flex overflow-hidden"
+          aria-hidden="true"
+          className="block min-h-[1.12em] whitespace-nowrap text-accent-cyan"
         >
-          {word.split("").map((char, charIndex) => (
-            <span
-              key={`${char}-${charIndex}`}
-              className="inline-block overflow-hidden"
-              aria-hidden="true"
-            >
-              <motion.span variants={letter} className="inline-block">
-                {char}
-              </motion.span>
-            </span>
-          ))}
+          {secondVisible}
+          {!prefersReducedMotion && !onFirstLine ? cursor : null}
         </span>
-      ))}
-    </motion.h1>
+      )}
+    </h1>
   );
 }
