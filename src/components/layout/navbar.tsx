@@ -2,131 +2,97 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-import { Container } from "@/components/ui/container";
-import { NAV_ITEMS } from "@/data/navigation";
-import { useActiveSection } from "@/hooks/use-active-section";
-import { EASE } from "@/lib/motion";
+import { FaArrowUpRightFromSquare, FaBars, FaXmark } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 
-const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
+const LINKS = [
+  { label: "HOME", href: "#home" },
+  { label: "EXPERTISE", href: "#skills" },
+  { label: "PROJECTS", href: "#projects" },
+  { label: "ABOUT", href: "#about" },
+] as const;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const activeId = useActiveSection(SECTION_IDS);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 45);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while the mobile overlay is open.
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
+    if (!open) return;
+    const old = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = old; window.removeEventListener("keydown", onKey); };
+  }, [open]);
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-[var(--duration-base)]",
-        scrolled ? "glass-surface" : "border-b border-transparent bg-transparent",
+        "fixed inset-x-0 top-0 z-50 h-[var(--nav-height)] border-b transition-all duration-500",
+        scrolled || open
+          ? "border-white/15 bg-[#0b0b0b]/90 shadow-[0_12px_40px_rgba(0,0,0,.3)] backdrop-blur-xl"
+          : "border-transparent bg-transparent",
       )}
-      style={{ height: "var(--nav-height)" }}
     >
-      <Container className="flex h-full items-center justify-between">
-        <a
-          href="#home"
-          className={cn(
-            "font-heading text-text-primary text-lg font-semibold tracking-tight transition-transform",
-            scrolled ? "scale-100" : "scale-105",
-          )}
-        >
-          PORT<span className="text-accent-cyan">FOLIO</span>
+      <div className="mx-auto flex h-full max-w-[1680px] items-center justify-between gap-8 px-5 sm:px-8 lg:px-[clamp(3rem,5.5vw,7rem)]">
+        <a href="#home" onClick={() => setOpen(false)} className="relative z-[60] inline-flex shrink-0 items-center gap-3" aria-label="Siam home">
+          <span className="font-heading text-[31px] leading-none tracking-[.005em] text-white">SIAM<span className="text-accent-cyan">.</span></span>
+          <span className="hidden border-l border-white/20 pl-3 text-[9px] leading-[1.6] font-bold tracking-[.16em] text-white/50 uppercase sm:block">
+            Designer of<br />Digital Systems
+          </span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeId === item.id;
-            return (
-              <a
-                key={item.id}
-                href={item.href}
-                aria-current={isActive ? "true" : undefined}
-                className={cn(
-                  "group font-heading relative py-2 text-sm tracking-wide transition-colors",
-                  isActive
-                    ? "text-text-primary"
-                    : "text-text-secondary hover:text-text-primary",
-                )}
-              >
-                {item.label}
-                <span
-                  className={cn(
-                    "bg-accent-cyan absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-soft)] group-hover:scale-x-100",
-                    isActive && "scale-x-100 shadow-[var(--glow-cyan-soft)]",
-                  )}
-                />
-              </a>
-            );
-          })}
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+          {LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="group relative py-3 text-[11px] font-semibold tracking-[.17em] text-white/65 transition-colors hover:text-accent-cyan">
+              {link.label}
+              <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-accent-cyan transition-transform duration-300 group-hover:scale-x-100" />
+            </a>
+          ))}
         </nav>
 
-        {/* Mobile trigger */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen((open) => !open)}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
-        >
-          <span
-            className={cn(
-              "bg-text-primary h-px w-6 transition-transform duration-[var(--duration-fast)]",
-              mobileOpen && "translate-y-[3.5px] rotate-45",
-            )}
-          />
-          <span
-            className={cn(
-              "bg-text-primary h-px w-6 transition-transform duration-[var(--duration-fast)]",
-              mobileOpen && "-translate-y-[3.5px] -rotate-45",
-            )}
-          />
-        </button>
-      </Container>
+        <a href="#contact" className="ml-auto hidden h-11 items-center gap-3 rounded-full bg-accent-cyan px-6 text-[11px] font-bold tracking-[.15em] text-[#080808] uppercase transition-colors hover:bg-[#ffe170] lg:ml-0 lg:inline-flex">
+          LET&apos;S TALK <FaArrowUpRightFromSquare size={13} aria-hidden="true" />
+        </a>
 
-      {/* Mobile fullscreen overlay menu */}
+        <button type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" className="relative z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white lg:hidden">
+          {open ? <FaXmark size={20} /> : <FaBars size={20} />}
+        </button>
+      </div>
+
       <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: EASE.outSoft }}
-            className="glass-surface fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 lg:hidden"
+        {open && (
+          <motion.nav
+            id="mobile-nav"
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: .3 }}
+            className="fixed inset-0 z-50 flex min-h-[100svh] flex-col justify-center bg-[#080808] px-8 pt-16 lg:hidden"
           >
-            {NAV_ITEMS.map((item, index) => (
+            {[...LINKS, { label: "EDUCATION", href: "#education" }, { label: "CERTIFICATES", href: "#certificates" }, { label: "ACHIEVEMENTS", href: "#achievements" }, { label: "CONTACT", href: "#contact" }].map((link, index) => (
               <motion.a
-                key={item.id}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                initial={{ opacity: 0, y: 16 }}
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 * index, duration: 0.4, ease: EASE.premium }}
-                className="font-heading text-text-primary hover:text-accent-cyan text-2xl transition-colors"
+                transition={{ duration: .4, delay: index * .045 }}
+                className="border-b border-white/10 py-3 font-heading text-[clamp(2.1rem,8vw,3.5rem)] leading-none text-white transition-colors hover:text-accent-cyan"
               >
-                {item.label}
+                <span className="mr-4 align-top font-body text-[11px] text-accent-cyan">{String(index + 1).padStart(2,"0")}</span>
+                {link.label}
               </motion.a>
             ))}
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

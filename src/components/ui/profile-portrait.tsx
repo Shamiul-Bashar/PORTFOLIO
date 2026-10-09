@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 
 interface ProfilePortraitProps {
@@ -15,83 +14,37 @@ interface ProfilePortraitProps {
 }
 
 export function ProfilePortrait({
-  src,
-  alt,
-  initials,
-  size = "lg",
-  className,
-  priority,
+  src, alt, initials, size = "lg", className, priority,
 }: ProfilePortraitProps) {
-  const dimension = size === "lg" ? 380 : 260;
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={cn("relative mx-auto", className)}
-      style={{
-        width: dimension,
-        height: dimension,
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: .8, ease: [0.16, 1, .3, 1] }}
+      className={cn(
+        "group relative mx-auto aspect-[4/5] w-full overflow-hidden border border-white/15 bg-[#191919]",
+        size === "lg" ? "max-w-[460px]" : "max-w-[385px]",
+        className,
+      )}
     >
-      {/* Glow */}
-
-      <div
-        aria-hidden
-        className="absolute -inset-14 rounded-full bg-accent-cyan/10 blur-[90px]"
-      />
-
-      <div
-        aria-hidden
-        className="absolute -inset-8 rounded-full bg-accent-purple/10 blur-[70px]"
-      />
-
-      {/* Border */}
-
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent-cyan via-accent-purple to-accent-cyan p-[2px]">
-
-        <div className="glass-surface relative h-full w-full overflow-hidden rounded-full">
-
-          {src ? (
-            <>
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes={`${dimension}px`}
-                className="object-cover transition-transform duration-500 hover:scale-105"
-              />
-
-              {/* Reflection */}
-
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-transparent"
-              />
-            </>
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-bg-secondary to-surface">
-
-              <span className="font-heading text-6xl font-bold text-white/80">
-                {initials}
-              </span>
-
-            </div>
-          )}
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={size === "lg" ? "(max-width:768px) 90vw,460px" : "(max-width:768px) 88vw,385px"}
+          className="object-cover object-top grayscale-[.18] transition-transform duration-700 group-hover:scale-[1.035]"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <span className="font-heading text-[120px] text-accent-cyan">{initials}</span>
         </div>
-      </div>
-
-      {/* Soft Inner Ring */}
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-4 rounded-full border border-white/10"
-      />
+      )}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+      <span aria-hidden="true" className="absolute bottom-0 left-0 h-[5px] w-24 bg-accent-cyan" />
+      <span aria-hidden="true" className="absolute bottom-5 right-5 font-mono text-[10px] tracking-[.2em] text-white uppercase">PORTRAIT / 01</span>
     </motion.div>
   );
 }

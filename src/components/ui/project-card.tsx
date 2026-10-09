@@ -1,153 +1,77 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaGithub, FaFileLines, FaArrowUpRightFromSquare, FaFolderClosed } from "react-icons/fa6";
-import { Project } from "@/types/project";
-import { Button } from "@/components/ui/button";
+import { FaArrowUpRightFromSquare, FaGithub, FaFileLines, FaFolderClosed, FaArrowRight } from "react-icons/fa6";
+import type { Project } from "@/types/project";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 export interface ProjectCardProps {
   project: Project;
   onOpen(project: Project): void;
+  className?: string;
 }
 
-export function ProjectCard({ project, onOpen }: ProjectCardProps) {
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
-      case "in progress":
-        return "bg-cyan-500/20 text-cyan-400 border-cyan-500/30";
-      default:
-        return "bg-surface text-text-secondary border-border";
-    }
-  };
-
+export function ProjectCard({ project, onOpen, className }: ProjectCardProps) {
+  const reduced = useReducedMotion();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl glass-surface border border-border transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(34,211,238,0.15)]"
+    <motion.article
+      initial={reduced ? false : { opacity: 0, y: 55, scale: .97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      whileHover={reduced ? undefined : { y: -10 }}
+      transition={{ duration: .7, ease: [0.16,1,.3,1] }}
+      className={cn(
+        "group flex h-full min-w-0 flex-col overflow-hidden border border-white/15 bg-[#141414] transition-colors duration-300 hover:border-accent-cyan/55",
+        className,
+      )}
     >
-      {/* Cover Image Container */}
-      <div className="relative aspect-video w-full overflow-hidden bg-surface">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-[#1b1b1b]">
         {project.coverImage ? (
-          <Image
-            src={project.coverImage}
-            alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+          <Image src={project.coverImage} alt={project.title} fill sizes="(max-width: 768px) 90vw, 560px" draggable={false}
+            className="object-cover saturate-[.8] transition-all duration-1000 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.06] group-hover:saturate-100" />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-surface transition-transform duration-500 group-hover:scale-110">
-            <FaFolderClosed className="h-12 w-12 text-text-secondary opacity-50" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 bg-[linear-gradient(145deg,#1c1c1c,#111111)]">
+            <FaFolderClosed size={50} className="text-accent-cyan/50" aria-hidden="true" />
+            <span className="font-mono text-[10px] tracking-[.24em] uppercase text-white/40">PROJECT / {project.year}</span>
           </div>
         )}
-
-        {/* Status Badge */}
-        <div
-          className={cn(
-            "absolute left-3 top-3 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-md",
-            getStatusColor(project.status)
-          )}
-        >
-          {project.status}
-        </div>
+        <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-50 transition-opacity duration-700 group-hover:opacity-20" />
+        <span className="absolute top-5 left-5 rounded-full border border-white/25 bg-black/70 px-4 py-2 text-[10px] font-bold tracking-[.14em] text-white uppercase backdrop-blur-sm">
+          {project.category}
+        </span>
       </div>
 
-      {/* Content Container */}
-      <div className="flex flex-grow flex-col gap-4 p-5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan">
-            {project.category}
-          </span>
-          <span className="text-xs text-text-secondary">{project.year}</span>
+      <div className="flex flex-1 flex-col px-6 pt-7 pb-6 sm:px-8 sm:pt-8">
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-[10px] font-bold tracking-[.18em] uppercase text-accent-cyan">{project.status}</p>
+          <span className="font-mono text-[11px] text-white/50">{project.year}</span>
         </div>
-
-        <h3 className="text-xl font-bold text-text-primary transition-colors group-hover:text-accent-cyan">
+        <h3 className="mt-4 font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[.98] uppercase text-white transition-colors duration-500 group-hover:text-accent-cyan">
           {project.title}
         </h3>
-
-        <p className="line-clamp-2 text-sm text-text-secondary">
-          {project.shortDescription}
-        </p>
-
-        {/* Technologies */}
-        <div className="mt-auto flex flex-wrap gap-2">
-          {project.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-surface border border-border px-2.5 py-1 text-[10px] font-medium text-text-secondary transition-colors"
-            >
-              {tech}
-            </span>
+        <p className="mt-4 line-clamp-3 min-h-[58px] text-[13px] leading-[1.75] text-text-secondary sm:text-sm">{project.shortDescription}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {project.technologies.slice(0,5).map((tech) => (
+            <span key={tech} className="rounded-full border border-white/15 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[.04em] text-white/65">{tech}</span>
           ))}
-          {project.technologies.length > 4 && (
-            <span className="rounded-full bg-surface border border-border px-2.5 py-1 text-[10px] font-medium text-text-secondary">
-              +{project.technologies.length - 4}
-            </span>
+          {project.technologies.length > 5 && (
+            <span className="rounded-full border border-white/15 px-3 py-1.5 text-[10px] text-white/55">+{project.technologies.length-5}</span>
           )}
         </div>
-
-        {/* Footer / Actions */}
-        <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
-          <Button
-            onClick={() => onOpen(project)}
-            variant="outline"
-            className="w-full transition-all group-hover:border-accent-cyan group-hover:text-accent-cyan"
-          >
-            View Details
-          </Button>
-
-          <div className="flex flex-wrap gap-2">
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Source Code"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaGithub className="mr-2 h-4 w-4" />
-                  GitHub
-                </Button>
-              </a>
-            )}
-            {project.reportUrl && (
-              <a
-                href={project.reportUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Project Report"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaFileLines className="mr-2 h-4 w-4" />
-                  Report
-                </Button>
-              </a>
-            )}
-            {project.liveDemoUrl && (
-              <a
-                href={project.liveDemoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="View Live Demo"
-                className="flex-1"
-              >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FaArrowUpRightFromSquare className="mr-2 h-4 w-4" />
-                  Live Demo
-                </Button>
-              </a>
-            )}
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-5 sm:mt-9">
+          <button type="button" onClick={() => onOpen(project)} className="group/action inline-flex items-center gap-3 text-[11px] font-bold tracking-[.14em] uppercase text-accent-cyan transition-colors hover:text-white">
+            VIEW CASE STUDY <FaArrowRight className="transition-transform group-hover/action:translate-x-1" size={13} aria-hidden="true" />
+          </button>
+          <div className="flex items-center gap-4 text-white/60">
+            {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub: ${project.title}`} className="hover:text-accent-cyan"><FaGithub size={16} /></a>}
+            {project.reportUrl && <a href={project.reportUrl} target="_blank" rel="noopener noreferrer" aria-label={`Report: ${project.title}`} className="hover:text-accent-cyan"><FaFileLines size={16} /></a>}
+            {project.liveDemoUrl && <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Live demo: ${project.title}`} className="hover:text-accent-cyan"><FaArrowUpRightFromSquare size={15} /></a>}
           </div>
         </div>
       </div>
-    </motion.div>
+      <span aria-hidden="true" className="h-[2px] w-full origin-left scale-x-0 bg-accent-cyan transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-x-100" />
+    </motion.article>
   );
 }

@@ -86,7 +86,7 @@ export function Education() {
       <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-cyan/10 absolute top-1/4 right-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>

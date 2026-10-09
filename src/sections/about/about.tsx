@@ -90,7 +90,7 @@ export function About() {
 
       <div
         aria-hidden="true"
-        className="bg-accent-purple/10 absolute top-1/4 -left-24 -z-10 h-72 w-72 rounded-full blur-[110px]"
+        className="hidden"
       />
 
       <Container className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">

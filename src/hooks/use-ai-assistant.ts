@@ -2,6 +2,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { ChatMessage } from "@/types/ai";
 import { generateAIResponse } from "@/lib/ai/assistant-engine";
+import { profile } from "@/data/profile";
 
 const WELCOME_MESSAGE: ChatMessage = {
   id: "1",
@@ -86,7 +87,7 @@ export function useAIAssistant() {
         break;
       }
       case "DOWNLOAD_RESUME": {
-        window.open("/resume.pdf", "_blank");
+        window.open(profile.cvUrl, "_blank", "noopener,noreferrer");
         break;
       }
       default:

@@ -1,85 +1,39 @@
-import { SiCplusplus, SiGit, SiGithub } from "react-icons/si";
+import {
+  SiCplusplus, SiGit, SiGithub, SiTypescript,
+  SiJavascript, SiReact, SiNodedotjs, SiHtml5, SiCss,
+  SiNextdotjs, SiCmake,
+} from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { FaFileWord, FaFileExcel } from "react-icons/fa6";
-
 import type { Skill } from "@/types/skill";
 
-// TODO: proficiency values are a starting self-assessment — tune freely,
-// and add new entries here as skills grow. Nothing else needs to change;
-// the Skills section renders whatever is in this array, grouped by category.
+// These are technologies documented by the owner's portfolio projects,
+// labs and GitHub repositories. No fabricated numeric proficiency scores.
 export const SKILLS: Skill[] = [
-  // Programming — C and Verilog have no official brand icon, so they
-  // render through the lettered-badge fallback in <SkillCard>.
-  {
-    id: "c",
-    name: "C",
-    category: "Programming",
-    proficiency: 75,
-    description: "Procedural programming, memory management, systems thinking.",
-  },
-  {
-    id: "cpp",
-    name: "C++",
-    category: "Programming",
-    icon: SiCplusplus,
-    proficiency: 80,
-    description: "OOP, data structures & algorithms, competitive programming.",
-  },
-  {
-    id: "verilog",
-    name: "Verilog HDL",
-    category: "Programming",
-    proficiency: 60,
-    description: "Hardware description language for digital logic design.",
-  },
+  { id: "c", name: "C", category: "Programming", description: "Procedural programming, memory handling and problem solving." },
+  { id: "cpp", name: "C++", category: "Programming", icon: SiCplusplus, description: "OOP, custom data structures, graph algorithms and console applications." },
+  { id: "typescript", name: "TypeScript", category: "Programming", icon: SiTypescript, description: "Typed React interfaces and interactive application development." },
+  { id: "javascript", name: "JavaScript", category: "Programming", icon: SiJavascript, description: "Frontend interaction and Node.js fundamentals." },
+  { id: "verilog", name: "Verilog HDL", category: "Programming", description: "RTL design, sequential logic and FPGA applications." },
+  { id: "assembly", name: "8086 Assembly", category: "Programming", description: "Registers, addressing modes and low-level programming coursework." },
 
-  // Tools
-  {
-    id: "git",
-    name: "Git",
-    category: "Tools",
-    icon: SiGit,
-    proficiency: 70,
-    description: "Version control, branching workflows, collaborative development.",
-  },
-  {
-    id: "github",
-    name: "GitHub",
-    category: "Tools",
-    icon: SiGithub,
-    proficiency: 75,
-    description: "Repository management, issues, and project collaboration.",
-  },
-  {
-    id: "vscode",
-    name: "VS Code",
-    category: "Tools",
-    icon: VscVscode,
-    proficiency: 85,
-    description: "Primary editor — extensions, debugging, integrated terminal.",
-  },
+  { id: "react", name: "React", category: "Web Development", icon: SiReact, description: "Interactive interfaces for software and simulation projects." },
+  { id: "nextjs", name: "Next.js", category: "Web Development", icon: SiNextdotjs, description: "App Router architecture and this personal portfolio." },
+  { id: "html", name: "HTML", category: "Web Development", icon: SiHtml5, description: "Semantic page structure and accessible markup." },
+  { id: "css", name: "CSS", category: "Web Development", icon: SiCss, description: "Responsive layouts, styling and motion fundamentals." },
+  { id: "node", name: "Node.js", category: "Web Development", icon: SiNodedotjs, description: "Basic server-side JavaScript and project API integration." },
 
-  // Microsoft Office
-  {
-    id: "word",
-    name: "Microsoft Word",
-    category: "Microsoft Office",
-    icon: FaFileWord,
-    proficiency: 80,
-    description: "Reports, documentation, and formatted academic writing.",
-  },
-  {
-    id: "excel",
-    name: "Microsoft Excel",
-    category: "Microsoft Office",
-    icon: FaFileExcel,
-    proficiency: 75,
-    description: "Data organization, formulas, and basic analysis.",
-  },
+  { id: "git", name: "Git", category: "Tools", icon: SiGit, description: "Version control, branching and project workflows." },
+  { id: "github", name: "GitHub", category: "Tools", icon: SiGithub, description: "Repository collaboration, documentation and CI." },
+  { id: "vscode", name: "VS Code", category: "Tools", icon: VscVscode, description: "Primary editor, integrated terminal and debugging." },
+  { id: "vivado", name: "Xilinx Vivado", category: "Tools", description: "Verilog simulation and Basys 3 FPGA design workflow." },
+  { id: "logisim", name: "Logisim", category: "Tools", description: "Digital logic and 28-bit microprogrammed CPU design." },
+  { id: "cmake", name: "CMake", category: "Tools", icon: SiCmake, description: "Building and testing C++ console projects." },
+
+  { id: "word", name: "Microsoft Word", category: "Microsoft Office", icon: FaFileWord, description: "Technical reports, documentation and academic writing." },
+  { id: "excel", name: "Microsoft Excel", category: "Microsoft Office", icon: FaFileExcel, description: "Data organization, formulas and basic analysis." },
 ];
 
 export const SKILL_CATEGORIES: Skill["category"][] = [
-  "Programming",
-  "Tools",
-  "Microsoft Office",
+  "Programming", "Web Development", "Tools", "Microsoft Office",
 ];

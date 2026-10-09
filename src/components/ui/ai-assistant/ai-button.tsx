@@ -64,7 +64,7 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
         duration-500
 
         hover:border-cyan-400/40
-        hover:shadow-[0_0_40px_rgba(34,211,238,.35)]
+        hover:shadow-[0_0_40px_rgba(244,204,39,.35)]
       "
       >
         {/* Glow Ring */}
@@ -118,7 +118,7 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
 
             bg-cyan-400
 
-            shadow-[0_0_12px_rgba(34,211,238,.8)]
+            shadow-[0_0_12px_rgba(244,204,39,.8)]
           "
           />
         )}

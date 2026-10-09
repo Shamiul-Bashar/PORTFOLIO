@@ -110,7 +110,7 @@ export function Achievements() {
       <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-purple/10 absolute top-1/3 left-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>

@@ -38,7 +38,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     id: "email",
     name: "Email",
-    url: "mailto:siambashar@gmail.com",
+    url: "mailto:siambasher@gmail.com",
     icon: MdEmail,
     tooltip: "Send me an email",
     displayOrder: 4,
