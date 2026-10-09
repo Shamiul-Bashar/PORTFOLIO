@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 
 import { Container } from "@/components/ui/container";
-import { ParticleField } from "@/components/ui/particle-field";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SkillCard } from "@/components/ui/skill-card";
 import { SKILLS, SKILL_CATEGORIES } from "@/data/skills";
@@ -16,10 +15,9 @@ export function Skills() {
       className="relative scroll-mt-(--nav-height) overflow-hidden py-28"
     >
       <div aria-hidden="true" className="bg-bg-primary absolute inset-0 -z-20" />
-      <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-purple/10 absolute bottom-0 left-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>
