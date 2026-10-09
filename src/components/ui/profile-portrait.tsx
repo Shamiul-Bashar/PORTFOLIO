@@ -34,8 +34,8 @@ export function ProfilePortrait({
       }}
       className={cn("relative mx-auto", className)}
       style={{
-        width: dimension,
-        height: dimension,
+        width: size === "lg" ? "min(76vw, 380px)" : "min(68vw, 260px)",
+        aspectRatio: "1 / 1",
       }}
     >
       {/* Glow */}
