@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { AILayout } from "@/components/ui/ai-assistant/ai-layout";
+import { ParticleField } from "@/components/ui/particle-field";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -37,23 +38,23 @@ const jetBrainsMono = JetBrains_Mono({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const SITE_TITLE =
-  "MD. Shamiul Basher Siam — CSE Student & Aspiring Software Engineer";
+  "MD. Shamiul Bashar Siam — CSE Student & Aspiring Software Engineer";
 
 const SITE_DESCRIPTION =
-  "Portfolio of MD. Shamiul Basher Siam, a Computer Science & Engineering student at KUET, building toward a career as a software engineer.";
+  "Portfolio of MD. Shamiul Bashar Siam, a Computer Science & Engineering student at KUET, building toward a career as a software engineer.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_TITLE,
-    template: "%s — Shamiul Basher Siam",
+    template: "%s — Shamiul Bashar Siam",
   },
   description: SITE_DESCRIPTION,
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Shamiul Basher Siam",
+    siteName: "Shamiul Bashar Siam",
     locale: "en_US",
     type: "website",
   },
@@ -76,6 +77,8 @@ export default function RootLayout({
     >
       <body className="bg-bg-primary text-text-primary flex min-h-full flex-col antialiased">
         <LoadingScreen />
+        {/* Low-density gold dust runs across the entire matte-black site. */}
+        <ParticleField className="fixed inset-0 z-[1] opacity-25" />
 
         <Providers>
           <ScrollProgress />
