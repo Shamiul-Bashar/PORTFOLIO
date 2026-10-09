@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { MotionLine } from "@/components/ui/motion-line";
 
 const FOCUS = [
   {
@@ -37,10 +38,10 @@ export function FocusAreas() {
         <div className="grid gap-10 lg:grid-cols-[1fr_350px] lg:items-end">
           <div>
             <p className="mb-5 flex items-center gap-3 text-[11px] font-bold tracking-[.19em] uppercase text-accent-cyan">
-              <span aria-hidden="true" className="h-px w-8 bg-accent-cyan" /> AREAS OF FOCUS
+              <span data-cinematic-rule aria-hidden="true" className="h-px w-8 origin-left bg-accent-cyan" /> AREAS OF FOCUS
             </p>
             <h2 id="focus-heading" className="font-heading text-[clamp(4.1rem,9vw,9.7rem)] leading-[.84] text-white uppercase">
-              WHAT I <span className="text-accent-cyan">BUILD.</span>
+              <MotionLine delay={.08}>WHAT I <span className="text-accent-cyan">BUILD.</span></MotionLine>
             </h2>
           </div>
           <p className="max-w-[350px] text-sm leading-[1.9] text-text-secondary">
@@ -51,15 +52,16 @@ export function FocusAreas() {
           {FOCUS.map((item, index) => (
             <motion.article
               key={item.id}
-              initial={{ opacity: 0, y: 26 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 62, scale: .965 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: .6, delay: index * .065 }}
-              className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden border border-white/10 bg-[#151515] p-7 transition-colors hover:border-accent-cyan/45 sm:p-9"
+              transition={{ duration: .85, delay: index * .095, ease: [.16,1,.3,1] }}
+              whileHover={{ y: -9, scale: 1.01 }}
+              data-motion-card="" className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden border border-white/10 bg-[#151515] p-7 transition-colors duration-500 hover:border-accent-cyan/50 sm:p-9"
             >
               <div className="flex items-start justify-between gap-4">
                 <span className="font-mono text-[11px] tracking-[.17em] text-accent-cyan">{item.id} / 04</span>
-                <span className="text-2xl text-white/25 transition-colors group-hover:text-accent-cyan" aria-hidden="true">↗</span>
+                <span className="text-2xl text-white/25 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent-cyan" aria-hidden="true">↗</span>
               </div>
               <div>
                 <h3 className="max-w-[420px] font-heading text-[clamp(2.7rem,4.5vw,4.9rem)] leading-[.9] text-white uppercase">{item.title}</h3>
