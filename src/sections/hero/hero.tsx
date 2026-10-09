@@ -139,7 +139,7 @@ export function Hero() {
         </motion.div>
       </Container>
 
-      <div className="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 lg:block">
+      <div className="relative z-10 hidden lg:block">
         <ScrollIndicator />
       </div>
     </section>
