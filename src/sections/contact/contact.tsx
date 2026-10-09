@@ -18,7 +18,7 @@ export function Contact() {
           <p className="mb-5 flex items-center gap-3 text-[11px] font-bold tracking-[.19em] uppercase text-accent-cyan">
             <span aria-hidden="true" className="h-px w-9 bg-accent-cyan" /> LET&apos;S CONNECT
           </p>
-          <h2 className="max-w-[1200px] font-heading text-[clamp(4.1rem,11vw,12rem)] leading-[.82] tracking-[-.015em] text-white uppercase">
+          <h2 className="max-w-[1200px] font-heading text-[clamp(2.8rem,10vw,11rem)] leading-[.82] tracking-[-.015em] text-white uppercase">
             LET&apos;S BUILD<br />
             SOMETHING<br />
             <span className="text-accent-cyan">EXTRAORDINARY.</span>
