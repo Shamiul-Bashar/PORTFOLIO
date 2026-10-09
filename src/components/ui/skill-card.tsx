@@ -85,24 +85,26 @@ export function SkillCard({ skill }: SkillCardProps) {
           </p>
         </div>
 
-        <div className="mt-auto">
-          <div
-            className="bg-surface h-1.5 w-full overflow-hidden rounded-full"
-            role="progressbar"
-            aria-label={`${skill.name} proficiency`}
-            aria-valuenow={skill.proficiency}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          >
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: `${skill.proficiency}%` }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 1, ease: EASE.premium, delay: 0.15 }}
-              className="from-accent-cyan to-accent-purple h-full rounded-full bg-gradient-to-r"
-            />
+        {typeof skill.proficiency === "number" && (
+          <div className="mt-auto">
+            <div
+              className="h-1.5 w-full overflow-hidden rounded-full bg-surface"
+              role="progressbar"
+              aria-label={`${skill.name} proficiency`}
+              aria-valuenow={skill.proficiency}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            >
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: `${skill.proficiency}%` }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 1, ease: EASE.premium, delay: 0.15 }}
+                className="h-full rounded-full bg-accent-cyan"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </motion.div>
   );
