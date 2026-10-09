@@ -136,9 +136,16 @@ code,pre,kbd { font-family: var(--font-mono); }
 .siam-marquee-track {
   display: flex;
   width: max-content;
-  animation: siam-marquee 38s linear infinite;
+  animation: siam-marquee 27s linear infinite;
 }
 .siam-marquee-viewport:hover .siam-marquee-track { animation-play-state: paused; }
+.siam-marquee-viewport {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .siam-marquee-track { animation: none !important; }
+}
 .siam-display { font-family: var(--font-heading); line-height: .84; letter-spacing: -.018em; }
 .siam-hairline { border-color: rgba(255,255,255,.11); }
 
