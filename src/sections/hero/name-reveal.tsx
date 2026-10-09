@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { MAX_LOADING_SCREEN_MS } from "@/lib/motion";
 
 interface NameRevealProps {
   text: string;
@@ -22,16 +23,24 @@ export function NameReveal({ text }: NameRevealProps) {
 
   useEffect(() => {
     if (prefersReducedMotion) return;
-    const timer = window.setInterval(() => {
-      setVisibleCount((count) => {
-        if (count >= name.length) {
-          window.clearInterval(timer);
-          return count;
-        }
-        return count + 1;
-      });
-    }, 82);
-    return () => window.clearInterval(timer);
+    // Begin once the introductory loading overlay is gone, so visitors
+    // actually see the typing sequence rather than missing it behind it.
+    let timer: number | undefined;
+    const start = window.setTimeout(() => {
+      timer = window.setInterval(() => {
+        setVisibleCount((count) => {
+          if (count >= name.length) {
+            window.clearInterval(timer);
+            return count;
+          }
+          return count + 1;
+        });
+      }, 74);
+    }, MAX_LOADING_SCREEN_MS - 150);
+    return () => {
+      window.clearTimeout(start);
+      if (timer !== undefined) window.clearInterval(timer);
+    };
   }, [name, prefersReducedMotion]);
 
   const count = prefersReducedMotion ? name.length : visibleCount;
