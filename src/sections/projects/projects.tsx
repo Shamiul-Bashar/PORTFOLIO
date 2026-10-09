@@ -8,6 +8,7 @@ import type { Project } from "@/types/project";
 import { ProjectCard } from "@/components/ui/project-card";
 import { ProjectModal } from "@/components/ui/project-modal";
 import { Container } from "@/components/ui/container";
+import { MotionLine } from "@/components/ui/motion-line";
 
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -76,10 +77,10 @@ export function ProjectsSection() {
         >
           <div>
             <p className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[.21em] uppercase text-accent-cyan">
-              <span aria-hidden="true" className="h-px w-9 bg-accent-cyan" /> SELECTED WORK
+              <span data-cinematic-rule aria-hidden="true" className="h-px w-9 origin-left bg-accent-cyan" /> SELECTED WORK
             </p>
             <h2 className="font-heading text-[clamp(4.3rem,10vw,10.5rem)] leading-[.82] uppercase text-white">
-              RECENT PROJECTS<br /><span className="text-white/45">&</span> <span className="text-accent-cyan">WORK.</span>
+              <MotionLine delay={.04}>RECENT PROJECTS</MotionLine><MotionLine delay={.17}><span className="text-white/45">&</span> <span className="text-accent-cyan">WORK.</span></MotionLine>
             </h2>
           </div>
           <div className="flex max-w-[310px] flex-col gap-5 lg:pb-2">
@@ -126,11 +127,11 @@ export function ProjectsSection() {
             <span aria-live="polite" className="font-mono text-[12px] font-medium tracking-[.1em] text-white">
               {String(active + 1).padStart(2,"0")} <span className="mx-2 text-accent-cyan">/</span> {String(PROJECTS.length).padStart(2,"0")}
             </span>
-            <span className="hidden h-px w-24 bg-white/15 sm:block" aria-hidden="true" />
+            <span className="hidden h-[2px] w-24 overflow-hidden bg-white/15 sm:block" aria-hidden="true"><motion.span className="block h-full origin-left bg-accent-cyan" animate={{ scaleX: (active + 1) / Math.max(1, PROJECTS.length) }} transition={{ duration: .55, ease: [.16,1,.3,1] }} /></span>
             <span className="hidden text-[10px] font-semibold tracking-[.13em] uppercase text-text-secondary sm:block">Drag to explore</span>
           </div>
           <div className="flex gap-2">
-            <button type="button" onClick={() => scrollToIndex(active - 1)} disabled={active === 0} aria-label="Previous project" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-accent-cyan hover:text-accent-cyan disabled:opacity-30"><FaArrowLeft size={15} /></button>
+            <button type="button" onClick={() => scrollToIndex(active - 1)} disabled={active === 0} aria-label="Previous project" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white transition-all duration-300 hover:scale-110 hover:border-accent-cyan hover:bg-accent-cyan hover:text-black active:scale-90 disabled:opacity-30"><FaArrowLeft size={15} /></button>
             <button type="button" onClick={() => scrollToIndex(active + 1)} disabled={active >= PROJECTS.length - 1} aria-label="Next project" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-accent-cyan hover:text-accent-cyan disabled:opacity-30"><FaArrowRight size={15} /></button>
           </div>
         </div>
