@@ -46,7 +46,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col justify-between gap-4 border-t border-white/10 py-7 sm:flex-row sm:items-center">
           <p className="text-[10px] font-semibold tracking-[.09em] uppercase text-text-secondary">
-            © {new Date().getFullYear()} MD SHAMIUL BASHAR SIAM. ALL RIGHTS RESERVED.
+            © {new Date().getFullYear()} MD. SHAMIUL BASHER SIAM. ALL RIGHTS RESERVED.
           </p>
           <div className="flex items-center justify-between gap-6">
             <span className="text-[10px] tracking-[.1em] uppercase text-white/35">DESIGNED TO EVOLVE</span>
