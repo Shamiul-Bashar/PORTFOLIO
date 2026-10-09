@@ -104,9 +104,9 @@ export const AIChatPanel = ({
           border-white/5
 
           bg-gradient-to-r
-          from-cyan-400/5
+          from-yellow-400/5
           via-transparent
-          to-purple-500/5
+          to-yellow-500/5
 
           px-5
           py-4
@@ -127,7 +127,7 @@ export const AIChatPanel = ({
 
               bg-cyan-400/10
 
-              shadow-[0_0_20px_rgba(34,211,238,.18)]
+              shadow-[0_0_20px_rgba(244,204,39,.18)]
             "
             >
               <Bot className="h-6 w-6 text-cyan-300" />
@@ -220,12 +220,12 @@ export const AIChatPanel = ({
                     isUser
                       ? `
                       bg-gradient-to-r
-                      from-cyan-500
+                      from-yellow-500
                       to-sky-500
 
                       text-white
 
-                      shadow-[0_8px_30px_rgba(34,211,238,.28)]
+                      shadow-[0_8px_30px_rgba(244,204,39,.28)]
                       `
                       : `
                       border
@@ -489,14 +489,14 @@ export const AIChatPanel = ({
               rounded-xl
 
               bg-gradient-to-r
-              from-cyan-500
+              from-yellow-500
               to-sky-500
 
               p-0
 
-              shadow-[0_8px_25px_rgba(34,211,238,.25)]
+              shadow-[0_8px_25px_rgba(244,204,39,.25)]
 
-              hover:from-cyan-400
+              hover:from-yellow-400
               hover:to-sky-400
               "
             >
