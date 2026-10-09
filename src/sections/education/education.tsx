@@ -5,7 +5,6 @@ import { FaGraduationCap, FaBuildingColumns, FaSchool } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 
 import { Container } from "@/components/ui/container";
-import { ParticleField } from "@/components/ui/particle-field";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { gsap } from "@/animations/gsap";
 import { EDUCATION } from "@/data/education";
@@ -83,10 +82,9 @@ export function Education() {
       className="relative scroll-mt-(--nav-height) overflow-hidden py-28"
     >
       <div aria-hidden="true" className="bg-bg-secondary absolute inset-0 -z-20" />
-      <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-cyan/10 absolute top-1/4 right-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>
