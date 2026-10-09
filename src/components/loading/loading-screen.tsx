@@ -13,10 +13,7 @@ export function LoadingScreen() {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    if (reduced) {
-      setVisible(false);
-      return;
-    }
+    if (reduced) return;
     const ctx = gsap.context(() => {
       gsap.timeline({
         defaults: { ease: "power3.out" },
