@@ -3,6 +3,7 @@ import { ScrollCinematics } from "@/components/ui/scroll-cinematics";
 import { Skills } from "@/sections/skills/skills";
 import { ProjectsSection } from "@/sections/projects/projects";
 import { FocusAreas } from "@/sections/focus/focus-areas";
+import { ScrollStatement } from "@/sections/focus/scroll-statement";
 import { About } from "@/sections/about/about";
 import { Education } from "@/sections/education/education";
 import { Certificates } from "@/sections/certificates/certificates";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Skills />
       <ProjectsSection />
+      <ScrollStatement />
       <FocusAreas />
       <About />
       <Education />
