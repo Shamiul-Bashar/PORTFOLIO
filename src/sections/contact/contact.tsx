@@ -12,11 +12,11 @@ export function Contact() {
       id="contact"
       className="relative overflow-hidden py-24 sm:py-32"
     >
-      {/* Background Glow */}
+      {/* Quiet matte backdrop: no bright bloom layers. */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="bg-accent-cyan/10 absolute left-1/4 top-0 h-80 w-80 rounded-full blur-3xl" />
+        <div className="hidden" />
 
-        <div className="bg-accent-purple/10 absolute bottom-0 right-1/4 h-80 w-80 rounded-full blur-3xl" />
+        <div className="hidden" />
       </div>
 
       <Container className="relative z-10">

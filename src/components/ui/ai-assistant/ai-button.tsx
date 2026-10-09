@@ -49,12 +49,12 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
         rounded-full
 
         border
-        border-cyan-400/20
+        border-yellow-400/20
 
         bg-gradient-to-br
-        from-[#132238]
-        via-[#0f172a]
-        to-[#08111f]
+        from-[#201d12]
+        via-[#14130f]
+        to-[#0e0e0b]
 
         backdrop-blur-xl
 
@@ -63,8 +63,8 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
         transition-all
         duration-500
 
-        hover:border-cyan-400/40
-        hover:shadow-[0_0_40px_rgba(34,211,238,.35)]
+        hover:border-yellow-400/40
+        hover:shadow-[0_0_40px_rgba(250,204,21,.23)]
       "
       >
         {/* Glow Ring */}
@@ -83,7 +83,7 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
           inset-0
           rounded-full
           border
-          border-cyan-400/30
+          border-yellow-400/30
         "
         />
 
@@ -94,7 +94,7 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
           absolute
           inset-0
           rounded-full
-          bg-cyan-400/5
+          bg-yellow-400/5
           blur-xl
         "
         />
@@ -114,11 +114,11 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
             rounded-full
 
             border-2
-            border-[#08111f]
+            border-[#0e0e0b]
 
-            bg-cyan-400
+            bg-yellow-400
 
-            shadow-[0_0_12px_rgba(34,211,238,.8)]
+            shadow-[0_0_12px_rgba(250,204,21,.65)]
           "
           />
         )}
@@ -134,9 +134,9 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
           }}
         >
           {isOpen ? (
-            <X className="h-7 w-7 text-cyan-300" />
+            <X className="h-7 w-7 text-yellow-300" />
           ) : (
-            <Bot className="h-7 w-7 text-cyan-300" />
+            <Bot className="h-7 w-7 text-yellow-300" />
           )}
         </motion.div>
 
@@ -161,9 +161,9 @@ export const AIButton = ({ onClick, isOpen }: AIButtonProps) => {
           rounded-xl
 
           border
-          border-cyan-400/15
+          border-yellow-400/15
 
-          bg-[#111827]
+          bg-[#1a1915]
 
           px-4
           py-2

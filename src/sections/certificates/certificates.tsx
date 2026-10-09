@@ -6,7 +6,6 @@ import { FaRegClock } from "react-icons/fa6";
 
 import { Container } from "@/components/ui/container";
 import { CertificateCard } from "@/components/ui/certificate-card";
-import { ParticleField } from "@/components/ui/particle-field";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CERTIFICATES } from "@/data/certificates";
 import { EASE, staggerContainer, fadeInUp } from "@/lib/motion";
@@ -39,10 +38,9 @@ export function Certificates() {
       className="relative scroll-mt-(--nav-height) overflow-hidden py-28"
     >
       <div aria-hidden="true" className="bg-bg-secondary absolute inset-0 -z-20" />
-      <ParticleField />
       <div
         aria-hidden="true"
-        className="bg-accent-cyan/10 absolute top-0 left-[-10%] -z-10 h-96 w-96 rounded-full blur-[130px]"
+        className="hidden"
       />
 
       <Container>

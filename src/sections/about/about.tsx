@@ -85,12 +85,12 @@ export function About() {
     >
       <div
         aria-hidden="true"
-        className="bg-bg-secondary absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+        className="bg-bg-secondary absolute inset-0 -z-10"
       />
 
       <div
         aria-hidden="true"
-        className="bg-accent-purple/10 absolute top-1/4 -left-24 -z-10 h-72 w-72 rounded-full blur-[110px]"
+        className="hidden"
       />
 
       <Container className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
@@ -103,6 +103,7 @@ export function About() {
             alt={profile.fullName}
             initials={initials}
             size="md"
+            variant="editorial"
           />
 
           <ul className="flex flex-wrap justify-center gap-2 lg:justify-start">

@@ -81,9 +81,9 @@ export const AIChatPanel = ({
         rounded-3xl
 
         border
-        border-cyan-400/15
+        border-yellow-400/15
 
-        bg-[#0B1220]/95
+        bg-[#11110e]/95
 
         backdrop-blur-2xl
 
@@ -104,9 +104,9 @@ export const AIChatPanel = ({
           border-white/5
 
           bg-gradient-to-r
-          from-cyan-400/5
+          from-yellow-400/5
           via-transparent
-          to-purple-500/5
+          to-amber-500/5
 
           px-5
           py-4
@@ -125,12 +125,12 @@ export const AIChatPanel = ({
 
               rounded-full
 
-              bg-cyan-400/10
+              bg-yellow-400/10
 
-              shadow-[0_0_20px_rgba(34,211,238,.18)]
+              shadow-[0_0_20px_rgba(250,204,21,.18)]
             "
             >
-              <Bot className="h-6 w-6 text-cyan-300" />
+              <Bot className="h-6 w-6 text-yellow-300" />
             </div>
 
             <div>
@@ -220,18 +220,18 @@ export const AIChatPanel = ({
                     isUser
                       ? `
                       bg-gradient-to-r
-                      from-cyan-500
-                      to-sky-500
+                      from-yellow-500
+                      to-amber-500
 
-                      text-white
+                      text-[#12120e]
 
-                      shadow-[0_8px_30px_rgba(34,211,238,.28)]
+                      shadow-[0_8px_30px_rgba(250,204,21,.19)]
                       `
                       : `
                       border
                       border-white/6
 
-                      bg-[#182235]
+                      bg-[#211f17]
 
                       text-slate-100
 
@@ -268,20 +268,20 @@ export const AIChatPanel = ({
                         rounded-xl
 
                         border
-                        border-cyan-400/15
+                        border-yellow-400/15
 
-                        bg-cyan-400/5
+                        bg-yellow-400/5
 
                         px-3
                         py-2
 
                         text-xs
-                        text-cyan-300
+                        text-yellow-300
 
                         transition-all
 
-                        hover:border-cyan-400/40
-                        hover:bg-cyan-400/10
+                        hover:border-yellow-400/40
+                        hover:bg-yellow-400/10
                         "
                       >
 
@@ -324,7 +324,7 @@ export const AIChatPanel = ({
                 border
                 border-white/6
 
-                bg-[#182235]
+                bg-[#211f17]
 
                 px-4
                 py-3
@@ -350,7 +350,7 @@ export const AIChatPanel = ({
                     h-2
                     w-2
                     rounded-full
-                    bg-cyan-300
+                    bg-yellow-300
                     "
                   />
 
@@ -371,7 +371,7 @@ export const AIChatPanel = ({
           border-t
           border-white/5
 
-          bg-[#0F172A]
+          bg-[#15140f]
 
           px-4
           py-3
@@ -405,9 +405,9 @@ export const AIChatPanel = ({
 
                 transition-all
 
-                hover:border-cyan-400/40
-                hover:bg-cyan-400/10
-                hover:text-cyan-300
+                hover:border-yellow-400/40
+                hover:bg-yellow-400/10
+                hover:text-yellow-300
                 "
               >
                 {action.label}
@@ -426,7 +426,7 @@ export const AIChatPanel = ({
           border-t
           border-white/5
 
-          bg-[#111827]
+          bg-[#1b1a15]
 
           p-4
           "
@@ -459,7 +459,7 @@ export const AIChatPanel = ({
               border
               border-white/8
 
-              bg-[#1A2438]
+              bg-[#232117]
 
               px-4
               py-3
@@ -473,9 +473,9 @@ export const AIChatPanel = ({
 
               transition-all
 
-              focus:border-cyan-400/40
+              focus:border-yellow-400/40
               focus:ring-2
-              focus:ring-cyan-400/10
+              focus:ring-yellow-400/10
               "
             />
 
@@ -489,15 +489,15 @@ export const AIChatPanel = ({
               rounded-xl
 
               bg-gradient-to-r
-              from-cyan-500
-              to-sky-500
+              from-yellow-400
+              to-amber-400
 
               p-0
 
-              shadow-[0_8px_25px_rgba(34,211,238,.25)]
+              shadow-[0_8px_25px_rgba(250,204,21,.22)]
 
-              hover:from-cyan-400
-              hover:to-sky-400
+              hover:from-yellow-400
+              hover:to-amber-400
               "
             >
 

@@ -77,7 +77,7 @@ export function ProjectModal({ project, open, onClose }: ProjectModalProps) {
                       project.status.toLowerCase() === "completed"
                         ? "border-green-500/30 bg-green-500/10 text-green-400"
                         : project.status.toLowerCase() === "in progress"
-                        ? "border-cyan-500/30 bg-cyan-500/10 text-accent-cyan"
+                        ? "border-yellow-500/30 bg-yellow-500/10 text-accent-cyan"
                         : "border-border bg-surface text-text-secondary"
                     )}
                   >

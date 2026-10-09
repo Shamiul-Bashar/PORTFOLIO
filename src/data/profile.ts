@@ -1,8 +1,8 @@
 import type { ProfileData } from "@/types/profile";
 
 export const profile: ProfileData = {
-  fullName: "MD. Shamiul Basher Siam",
-  displayName: "Shamiul Basher Siam",
+  fullName: "MD SHAMIUL BASHAR SIAM",
+  displayName: "Shamiul Bashar Siam",
 
   titles: [
     "Computer Science & Engineering Student",
@@ -25,7 +25,7 @@ export const profile: ProfileData = {
   ],
 
   quickFacts: [
-    { label: "Name", value: "MD. Shamiul Basher Siam" },
+    { label: "Name", value: "MD SHAMIUL BASHAR SIAM" },
     { label: "Nationality", value: "Bangladeshi" },
     { label: "Current Degree", value: "Bachelor of Science" },
     { label: "Department", value: "Computer Science & Engineering" },

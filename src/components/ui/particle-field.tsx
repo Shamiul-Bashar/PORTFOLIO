@@ -1,79 +1,30 @@
 import { cn } from "@/lib/utils";
 
-interface Particle {
-  left: string;
-  top: string;
-  size: number;
-  duration: number;
-  delay: number;
-  color: "cyan" | "purple";
-}
-
-// Fixed, hand-placed positions rather than Math.random(): keeps the server
-// and client render identical (no hydration mismatch) while still reading
-// as organic, non-grid placement.
-const PARTICLES: Particle[] = [
-  { left: "6%", top: "18%", size: 3, duration: 9, delay: 0, color: "cyan" },
-  { left: "14%", top: "72%", size: 2, duration: 11, delay: 1.2, color: "purple" },
-  { left: "22%", top: "40%", size: 4, duration: 8, delay: 0.6, color: "cyan" },
-  { left: "31%", top: "85%", size: 2, duration: 12, delay: 2, color: "cyan" },
-  { left: "40%", top: "12%", size: 3, duration: 10, delay: 0.3, color: "purple" },
-  { left: "52%", top: "60%", size: 2, duration: 9.5, delay: 1.6, color: "cyan" },
-  { left: "61%", top: "28%", size: 4, duration: 13, delay: 0.9, color: "purple" },
-  { left: "70%", top: "78%", size: 3, duration: 8.5, delay: 2.4, color: "cyan" },
-  { left: "78%", top: "20%", size: 2, duration: 11.5, delay: 0.4, color: "purple" },
-  { left: "86%", top: "55%", size: 3, duration: 10.5, delay: 1.8, color: "cyan" },
-  { left: "92%", top: "88%", size: 2, duration: 9, delay: 1, color: "purple" },
-  { left: "48%", top: "94%", size: 3, duration: 12.5, delay: 0.7, color: "cyan" },
+interface Particle { x: string; y: string; duration: number; delay: number; size: number; }
+// Deterministic so SSR and hydration agree. No animation engine or heavy canvas.
+const DUST: Particle[] = [
+  { x: "6%", y: "25%", duration: 18, delay: -4, size: 2 },
+  { x: "19%", y: "78%", duration: 15, delay: -6, size: 2 },
+  { x: "33%", y: "16%", duration: 21, delay: -3, size: 1 },
+  { x: "48%", y: "57%", duration: 19, delay: -7, size: 2 },
+  { x: "61%", y: "27%", duration: 22, delay: -5, size: 1 },
+  { x: "70%", y: "71%", duration: 17, delay: -9, size: 2 },
+  { x: "83%", y: "12%", duration: 20, delay: -11, size: 2 },
+  { x: "93%", y: "54%", duration: 16, delay: -8, size: 1 },
 ];
-
-interface ParticleFieldProps {
-  className?: string;
-}
-
-/**
- * Purely decorative — aria-hidden, CSS-only motion (respects the global
- * prefers-reduced-motion rule in globals.css automatically via
- * motion-safe:). Never mounted with JS-computed randomness so it's safe
- * in a server component.
- */
-export function ParticleField({ className }: ParticleFieldProps) {
+export function ParticleField({ className }: { className?: string }) {
   return (
-    <div
-      className={cn("pointer-events-none absolute inset-0 -z-10", className)}
-      aria-hidden="true"
-    >
-      {PARTICLES.map((particle, index) => (
+    <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
+      {DUST.map((p, i) => (
         <span
-          key={index}
-          className={cn(
-            "absolute rounded-full motion-safe:animate-[particle-float_ease-in-out_infinite]",
-            particle.color === "cyan" ? "bg-accent-cyan/50" : "bg-accent-purple/50",
-          )}
+          key={i}
+          className="absolute rounded-full bg-accent-cyan motion-safe:animate-[subtle-rise_ease-in-out_infinite]"
           style={{
-            left: particle.left,
-            top: particle.top,
-            width: particle.size,
-            height: particle.size,
-            animationDuration: `${particle.duration}s`,
-            animationDelay: `${particle.delay}s`,
+            left: p.x, top: p.y, width: p.size, height: p.size,
+            animationDuration: `${p.duration}s`, animationDelay: `${p.delay}s`,
           }}
         />
       ))}
-
-      <style jsx global>{`
-        @keyframes particle-float {
-          0%,
-          100% {
-            transform: translateY(0);
-            opacity: 0.25;
-          }
-          50% {
-            transform: translateY(-22px);
-            opacity: 0.7;
-          }
-        }
-      `}</style>
     </div>
   );
 }
