@@ -1,147 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaArrowRight, FaDownload } from "react-icons/fa6";
-
+import { ArrowDownRight, ArrowUpRight, Download } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { ProfilePortrait } from "@/components/ui/profile-portrait";
 import { SocialIcons } from "@/components/ui/social-icons";
 import { profile } from "@/data/profile";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
-
 import { HeroBackground } from "./hero-background";
 import { NameReveal } from "./name-reveal";
-import { RotatingTitles } from "./rotating-titles";
-import { ScrollIndicator } from "./scroll-indicator";
 
-const initials = profile.displayName
-  .split(" ")
-  .map((part) => part[0])
-  .join("")
-  .slice(0, 2)
-  .toUpperCase();
+const initials = profile.displayName.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
 
 export function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate flex min-h-screen scroll-mt-(--nav-height) items-center overflow-hidden pt-32 pb-24 lg:pt-28 lg:pb-16"
+      className="relative isolate flex min-h-screen scroll-mt-(--nav-height) items-center overflow-hidden bg-bg-primary pt-28 pb-16 md:pt-32 md:pb-24"
     >
       <HeroBackground />
 
-      <Container className="relative z-10 grid w-full items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+      <Container className="relative z-10 grid w-full items-center gap-16 lg:grid-cols-[minmax(0,1.24fr)_minmax(0,0.76fr)] lg:gap-12">
         <motion.div
-          variants={staggerContainer(0.13, 0.2)}
+          variants={staggerContainer(0.12, 0.15)}
           initial="hidden"
           animate="visible"
-          className="order-1 flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left"
+          className="relative order-1 min-w-0"
         >
-          <motion.div variants={fadeInUp}>
-            <span className="inline-flex items-center gap-3 rounded-full border border-accent-cyan/25 bg-accent-cyan/[0.06] px-4 py-2 font-mono text-[10px] font-medium tracking-[0.21em] uppercase text-accent-cyan sm:text-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan shadow-[var(--glow-cyan-soft)] motion-safe:animate-pulse" />
-              Portfolio / 2026
-            </span>
+          <motion.div variants={fadeInUp} className="mb-10 flex items-center gap-3">
+            <span aria-hidden="true" className="h-[2px] w-10 bg-accent-cyan" />
+            <p className="font-mono text-[10px] font-medium uppercase tracking-[0.21em] text-accent-cyan sm:text-xs">
+              Computer Science & Engineering · KUET
+            </p>
           </motion.div>
 
           <motion.p
             variants={fadeInUp}
-            className="mt-9 font-mono text-sm tracking-[0.24em] uppercase text-text-secondary sm:text-base"
+            className="mb-3 text-sm font-semibold tracking-[0.015em] text-text-secondary sm:text-base"
           >
             Hello, I&apos;m
           </motion.p>
 
-          <motion.div variants={fadeInUp} className="mt-3 w-full">
+          <motion.div variants={fadeInUp}>
             <NameReveal text={profile.fullName} />
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="mt-6">
-            <RotatingTitles titles={profile.titles} />
+          <motion.div variants={fadeInUp} className="mt-8 max-w-[580px]">
+            <p className="text-[clamp(1.12rem,2vw,1.45rem)] font-medium leading-[1.6] tracking-[-0.02em] text-text-primary">
+              Building thoughtful software and solving problems through engineering.
+            </p>
+            <p className="mt-3 max-w-[510px] text-sm leading-[1.95] text-text-secondary sm:text-[15px]">
+              CSE undergraduate at Khulna University of Engineering & Technology, exploring algorithms, software systems and modern web applications.
+            </p>
           </motion.div>
 
-          <motion.p
-            variants={fadeInUp}
-            className="mt-7 max-w-[590px] text-sm leading-7 text-text-secondary sm:text-base sm:leading-8"
-          >
-            {profile.heroIntro}
-          </motion.p>
-
-          <motion.div
-            variants={fadeInUp}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
-          >
-            <MagneticButton
-              href="#projects"
-              variant="primary"
-              size="lg"
-              className="shadow-[var(--glow-cyan-soft)]"
-            >
-              View My Work <FaArrowRight aria-hidden="true" />
+          <motion.div variants={fadeInUp} className="mt-9 flex flex-wrap items-center gap-3">
+            <MagneticButton href="#projects" variant="primary" size="lg" className="min-w-[175px]">
+              Explore Projects <ArrowUpRight size={17} aria-hidden="true" />
             </MagneticButton>
             <MagneticButton href={profile.cvUrl} external variant="secondary" size="lg">
-              <FaDownload aria-hidden="true" /> Download Resume
-            </MagneticButton>
-            <MagneticButton href="#contact" variant="ghost" size="lg">
-              Contact Me
+              Download CV <Download size={16} aria-hidden="true" />
             </MagneticButton>
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="mt-8">
+          <motion.div variants={fadeInUp} className="mt-9 flex flex-wrap items-center gap-5">
             <SocialIcons />
+            <span aria-hidden="true" className="hidden h-5 w-px bg-white/15 sm:block" />
+            <a href="#contact" className="group inline-flex items-center gap-1.5 text-xs font-semibold text-text-secondary transition-colors hover:text-accent-cyan">
+              Get in touch <ArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" size={15} aria-hidden="true" />
+            </a>
           </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            className="mt-10 flex items-center gap-3 border-t border-accent-cyan/15 pt-5 font-mono text-[10px] tracking-[0.18em] uppercase text-text-secondary"
-          >
-            <span className="h-px w-7 bg-accent-cyan/70" />
-            Built with purpose. Powered by curiosity.
+          <motion.div variants={fadeInUp} className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+            <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-text-secondary">Software Development</span>
+            <span className="hidden h-1 w-1 rounded-full bg-accent-cyan sm:block" />
+            <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-text-secondary">Algorithms & Systems</span>
           </motion.div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 48, scale: 0.94 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 1.05, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-          className="relative order-2 mx-auto flex w-full max-w-[470px] items-center justify-center py-8 lg:py-16"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="relative order-2 mx-auto w-full max-w-[430px] lg:justify-self-end"
         >
-          <div
-            aria-hidden="true"
-            className="absolute aspect-square w-[min(92vw,460px)] rounded-full border border-accent-cyan/10"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute aspect-square w-[min(82vw,410px)] rounded-full border border-dashed border-accent-cyan/15"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute aspect-square w-[min(75vw,380px)] rounded-full bg-accent-cyan/[0.085] blur-[90px]"
-          />
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10"
-          >
+          <div className="relative pl-4 pt-4 sm:pl-6 sm:pt-6">
+            <span className="absolute top-0 left-0 h-[2px] w-[74px] bg-accent-cyan" aria-hidden="true" />
+            <span className="absolute top-0 left-0 h-[74px] w-[2px] bg-accent-cyan" aria-hidden="true" />
             <ProfilePortrait
               src={profile.profileImageSrc}
               alt={profile.fullName}
               initials={initials}
+              variant="editorial"
               size="lg"
               priority
             />
-          </motion.div>
-          <div className="absolute right-0 bottom-0 z-20 rounded-xl border border-accent-cyan/25 bg-bg-secondary/95 px-5 py-3 shadow-[var(--shadow-elevation-2)] backdrop-blur-lg sm:right-1">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-cyan">
-              Current Focus
-            </p>
-            <p className="mt-1 text-xs font-medium text-text-primary">CSE · KUET</p>
+          </div>
+          <div className="mt-4 flex items-center justify-between gap-4 pl-4 sm:pl-6">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.19em] text-accent-cyan">
+                Currently Based In
+              </p>
+              <p className="mt-1 text-sm font-semibold text-text-primary">Khulna, Bangladesh</p>
+            </div>
+            <ArrowDownRight className="text-accent-cyan" size={24} strokeWidth={1.6} aria-hidden="true" />
           </div>
         </motion.div>
       </Container>
-
-      <div className="relative z-10 hidden lg:block">
-        <ScrollIndicator />
-      </div>
     </section>
   );
 }
