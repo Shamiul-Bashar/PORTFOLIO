@@ -40,7 +40,7 @@ export function NameReveal({ text }: { text: string }) {
   return (
     <h1
       aria-label={full}
-      className="siam-display w-full max-w-full text-[clamp(3.4rem,12.3vw,12rem)] uppercase text-text-primary"
+      className="siam-display w-full max-w-full text-[clamp(3.05rem,12.3vw,12rem)] uppercase text-text-primary"
     >
       <span className="block min-h-[.89em] whitespace-nowrap" aria-hidden="true">
         <span className="text-accent-cyan">{firstVisible.slice(0,3)}</span>
