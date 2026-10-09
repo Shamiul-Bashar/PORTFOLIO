@@ -1,66 +1,61 @@
 "use client";
 
-import { motion } from "framer-motion";
-
+import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { EASE } from "@/lib/motion";
+import { MAX_LOADING_SCREEN_MS } from "@/lib/motion";
 
-interface NameRevealProps {
-  text: string;
-}
+/** Two-line, single-pass typewriter on a massive condensed display heading.
+ * The full heading is exposed via aria-label even while characters animate. */
+export function NameReveal({ text }: { text: string }) {
+  const reduced = useReducedMotion();
+  const [typed, setTyped] = useState(0);
+  const full = text.trim().replace(/\s+/g, " ").toUpperCase();
+  const first = "MD SHAMIUL";
+  const second = "BASHAR SIAM";
 
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.035, delayChildren: 0.15 },
-  },
-};
+  useEffect(() => {
+    if (reduced) return;
+    let timer: number | undefined;
+    const start = window.setTimeout(() => {
+      timer = window.setInterval(() => {
+        setTyped((n) => {
+          if (n >= full.length) {
+            if (timer !== undefined) window.clearInterval(timer);
+            return n;
+          }
+          return n + 1;
+        });
+      }, 56);
+    }, MAX_LOADING_SCREEN_MS - 100);
+    return () => {
+      window.clearTimeout(start);
+      if (timer !== undefined) window.clearInterval(timer);
+    };
+  }, [full, reduced]);
 
-const letter = {
-  hidden: { y: "115%" },
-  visible: {
-    y: "0%",
-    transition: { duration: 0.75, ease: EASE.premium },
-  },
-};
-
-export function NameReveal({ text }: NameRevealProps) {
-  const prefersReducedMotion = useReducedMotion();
-
-  if (prefersReducedMotion) {
-    return (
-      <h1 className="font-heading text-text-primary text-4xl font-semibold sm:text-6xl lg:text-7xl">
-        {text}
-      </h1>
-    );
-  }
+  const count = reduced ? full.length : typed;
+  const firstVisible = first.slice(0, count);
+  const secondVisible = second.slice(0, Math.max(0, count - first.length - 1));
 
   return (
-    <motion.h1
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className="font-heading text-text-primary text-4xl font-semibold sm:text-6xl lg:text-7xl"
-      aria-label={text}
+    <h1
+      aria-label={full}
+      className="siam-display w-full max-w-full text-[clamp(3.4rem,12.3vw,12rem)] uppercase text-text-primary"
     >
-      {text.split(" ").map((word, wordIndex) => (
-        <span
-          key={`${word}-${wordIndex}`}
-          className="mr-[0.28em] inline-flex overflow-hidden"
-        >
-          {word.split("").map((char, charIndex) => (
-            <span
-              key={`${char}-${charIndex}`}
-              className="inline-block overflow-hidden"
-              aria-hidden="true"
-            >
-              <motion.span variants={letter} className="inline-block">
-                {char}
-              </motion.span>
-            </span>
-          ))}
-        </span>
-      ))}
-    </motion.h1>
+      <span className="block min-h-[.89em] whitespace-nowrap" aria-hidden="true">
+        <span className="text-accent-cyan">{firstVisible.slice(0,3)}</span>
+        {firstVisible.slice(3)}
+        {!reduced && count <= first.length && (
+          <span className="ml-[.025em] inline-block h-[.69em] w-[.025em] translate-y-[.035em] bg-accent-cyan align-baseline motion-safe:animate-[siam-caret_1s_steps(1,end)_infinite]" />
+        )}
+      </span>
+      <span className="block min-h-[.89em] whitespace-nowrap" aria-hidden="true">
+        {secondVisible.slice(0, 6)}
+        <span className="text-accent-cyan">{secondVisible.slice(6)}</span>
+        {!reduced && count > first.length && (
+          <span className="ml-[.025em] inline-block h-[.69em] w-[.025em] translate-y-[.035em] bg-accent-cyan align-baseline motion-safe:animate-[siam-caret_1s_steps(1,end)_infinite]" />
+        )}
+      </span>
+    </h1>
   );
 }
