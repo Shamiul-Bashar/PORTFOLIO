@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, FileText, FolderCode2, Github, ExternalLink } from "lucide-react";
+import { ArrowUpRight, FileText, FolderCode, Github, ExternalLink } from "lucide-react";
 import type { Project } from "@/types/project";
 
 export interface ProjectCardProps {
@@ -30,7 +30,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
           />
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-3 bg-[#202020]">
-            <FolderCode2 size={37} strokeWidth={1} className="text-accent-cyan/55" aria-hidden="true" />
+            <FolderCode size={37} strokeWidth={1} className="text-accent-cyan/55" aria-hidden="true" />
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary">
               Project / {project.year}
             </span>
