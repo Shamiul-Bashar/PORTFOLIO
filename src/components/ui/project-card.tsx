@@ -16,7 +16,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
       case "completed":
         return "bg-green-500/20 text-green-400 border-green-500/30";
       case "in progress":
-        return "bg-cyan-500/20 text-cyan-400 border-cyan-500/30";
+        return "bg-yellow-500/15 text-yellow-300 border-yellow-400/30";
       default:
         return "bg-surface text-text-secondary border-border";
     }
@@ -29,7 +29,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -4, scale: 1.02 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl glass-surface border border-border transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(34,211,238,0.15)]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl glass-surface border border-border transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(250,204,21,0.16)]"
     >
       {/* Cover Image Container */}
       <div className="relative aspect-video w-full overflow-hidden bg-surface">
